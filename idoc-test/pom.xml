@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>idoc-api</artifactId>
-    <description>The api of i-doc maven plugin.</description>
+    <artifactId>idoc-test</artifactId>
+    <description>The test module of i-doc project.</description>
 
 </project>
