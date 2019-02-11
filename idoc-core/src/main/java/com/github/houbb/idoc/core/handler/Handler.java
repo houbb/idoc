@@ -4,15 +4,18 @@ import com.github.houbb.idoc.core.exception.IDocRuntimeException;
 
 /**
  * 处理
- * @param <T> 泛型
+ * @param <T> 泛型入参
+ * @param <R> 泛型结果
+ * @author binbin.hou
  */
-public interface Handler<T> {
+public interface Handler<T, R> {
 
     /**
      * 处理
      * @param t 模板
      * @throws IDocRuntimeException if any
+     * @return 结果
      */
-    void handle(T t) throws IDocRuntimeException;
+    R handle(T t) throws IDocRuntimeException;
 
 }

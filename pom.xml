@@ -48,6 +48,12 @@
     <dependencyManagement>
         <dependencies>
             <!--============================== SELF ==============================-->
+            <dependency>
+                <groupId>com.github.houbb</groupId>
+                <artifactId>idoc-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <!--============================== INTER ==============================-->
             <dependency>
                 <groupId>com.github.houbb</groupId>

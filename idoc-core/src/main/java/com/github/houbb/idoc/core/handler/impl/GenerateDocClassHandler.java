@@ -1,5 +1,6 @@
 package com.github.houbb.idoc.core.handler.impl;
 
+import com.github.houbb.idoc.api.model.metadata.DocClass;
 import com.github.houbb.idoc.core.exception.IDocRuntimeException;
 import com.github.houbb.idoc.core.handler.JavaClassHandler;
 import com.thoughtworks.qdox.model.JavaClass;
@@ -11,7 +12,7 @@ import com.thoughtworks.qdox.model.JavaClass;
  */
 public class GenerateDocClassHandler implements JavaClassHandler {
     @Override
-    public void handle(JavaClass javaClass) throws IDocRuntimeException {
-
+    public DocClass handle(JavaClass javaClass) throws IDocRuntimeException {
+        return null;
     }
 }

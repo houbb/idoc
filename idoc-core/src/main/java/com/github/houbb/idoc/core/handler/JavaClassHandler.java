@@ -1,5 +1,6 @@
 package com.github.houbb.idoc.core.handler;
 
+import com.github.houbb.idoc.api.model.metadata.DocClass;
 import com.thoughtworks.qdox.model.JavaClass;
 
 /**
@@ -7,5 +8,5 @@ import com.thoughtworks.qdox.model.JavaClass;
  *
  * @author houbinbin
  */
-public interface JavaClassHandler extends Handler<JavaClass> {
+public interface JavaClassHandler extends Handler<JavaClass, DocClass> {
 }

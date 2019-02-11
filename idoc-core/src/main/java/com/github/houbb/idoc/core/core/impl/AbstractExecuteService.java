@@ -1,6 +1,7 @@
 package com.github.houbb.idoc.core.core.impl;
 
 
+import com.github.houbb.idoc.api.model.metadata.DocClass;
 import com.github.houbb.idoc.core.core.ExecuteService;
 import com.github.houbb.idoc.core.exception.IDocRuntimeException;
 import com.github.houbb.idoc.core.handler.JavaClassHandler;
@@ -14,7 +15,9 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * 抽象执行服务
@@ -80,17 +83,23 @@ public abstract class AbstractExecuteService implements ExecuteService {
             return;
         }
 
+        //3. 构建对应的对象信息
+        List<DocClass> docClassList = new ArrayList<>();
+        JavaClassHandler javaClassHandler = configJavaClassHandler();
+
         int totalNum = javaClasses.length;
         log.info("共计 【" + totalNum + "】 个文件待处理，请耐心等待。进度如下：");
         ConsoleProgressBar cpb = new ConsoleProgressBar(0, totalNum,
                 100, '=');
         for (int i = 0; i < javaClasses.length; i++) {
-            configJavaClassHandler().handle(javaClasses[i]);
+            final JavaClass javaClass = javaClasses[i];
+            DocClass docClass = javaClassHandler.handle(javaClass);
+            docClassList.add(docClass);
             cpb.show((long) (i + 1));
         }
 
         //3. 执行之后
-        afterExecute();
+        afterExecute(docClassList);
     }
 
     /**
@@ -109,11 +118,10 @@ public abstract class AbstractExecuteService implements ExecuteService {
 
     /**
      * 执行之后
-     *
+     * @param docClassList 列表
      * @throws IDocRuntimeException if any
      */
-    protected abstract void afterExecute() throws IDocRuntimeException;
-
+    protected abstract void afterExecute(final List<DocClass> docClassList) throws IDocRuntimeException;
 
     /**
      * 获取 java 类数组
