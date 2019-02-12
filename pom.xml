@@ -214,8 +214,8 @@
         </license>
     </licenses>
     <scm>
-        <url>https://github.com/houbb/maven-gen-plugin</url>
-        <connection>https://github.com/houbb/gen-maven-plugin.git</connection>
+        <url>https://github.com/houbb/idoc</url>
+        <connection>https://github.com/houbb/idoc.git</connection>
         <developerConnection>https://houbb.github.io/</developerConnection>
     </scm>
     <developers>
