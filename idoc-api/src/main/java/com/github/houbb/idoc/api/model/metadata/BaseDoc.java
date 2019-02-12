@@ -1,5 +1,8 @@
 package com.github.houbb.idoc.api.model.metadata;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author binbin.hou
  * date 2019/2/11
@@ -7,24 +10,10 @@ package com.github.houbb.idoc.api.model.metadata;
 public class BaseDoc {
 
     /**
-     * 行号
-     */
-    private int lineNum;
-
-    /**
-     * 作者
-     */
-    private String author;
-
-    /**
-     * 初始化版本
+     * 开始版本号
+     * 备注：用户可以指定版本号，过滤生成文档信息
      */
     private String since;
-
-    /**
-     * 当前版本
-     */
-    private String version;
 
     /**
      * 名称
@@ -32,9 +21,9 @@ public class BaseDoc {
     private String name;
 
     /**
-     * 说明
+     * 注释
      */
-    private String desc;
+    private String comment;
 
     /**
      * 备注
@@ -44,15 +33,17 @@ public class BaseDoc {
     /**
      * 访问级别
      */
-    private int modifiers;
+    private String[] modifiers;
 
-    public String getAuthor() {
-        return author;
-    }
+    /**
+     * doc 标签列表
+     */
+    private List<DocTag> docTagList;
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
+    /**
+     * doc 注解列表
+     */
+    private List<DocAnnotation> docAnnotationList;
 
     public String getSince() {
         return since;
@@ -60,14 +51,6 @@ public class BaseDoc {
 
     public void setSince(String since) {
         this.since = since;
-    }
-
-    public String getVersion() {
-        return version;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
     }
 
     public String getName() {
@@ -78,12 +61,12 @@ public class BaseDoc {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getComment() {
+        return comment;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public String getRemark() {
@@ -94,19 +77,40 @@ public class BaseDoc {
         this.remark = remark;
     }
 
-    public int getLineNum() {
-        return lineNum;
-    }
-
-    public void setLineNum(int lineNum) {
-        this.lineNum = lineNum;
-    }
-
-    public int getModifiers() {
+    public String[] getModifiers() {
         return modifiers;
     }
 
-    public void setModifiers(int modifiers) {
+    public void setModifiers(String[] modifiers) {
         this.modifiers = modifiers;
+    }
+
+    public List<DocTag> getDocTagList() {
+        return docTagList;
+    }
+
+    public void setDocTagList(List<DocTag> docTagList) {
+        this.docTagList = docTagList;
+    }
+
+    public List<DocAnnotation> getDocAnnotationList() {
+        return docAnnotationList;
+    }
+
+    public void setDocAnnotationList(List<DocAnnotation> docAnnotationList) {
+        this.docAnnotationList = docAnnotationList;
+    }
+
+    @Override
+    public String toString() {
+        return "BaseDoc{" +
+                "since='" + since + '\'' +
+                ", name='" + name + '\'' +
+                ", comment='" + comment + '\'' +
+                ", remark='" + remark + '\'' +
+                ", modifiers=" + Arrays.toString(modifiers) +
+                ", docTagList=" + docTagList +
+                ", docAnnotationList=" + docAnnotationList +
+                '}';
     }
 }

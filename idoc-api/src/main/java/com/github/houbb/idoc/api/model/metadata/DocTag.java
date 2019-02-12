@@ -1,10 +1,12 @@
 package com.github.houbb.idoc.api.model.metadata;
 
+import java.util.Arrays;
+
 /**
  * doclet 标签值对象
  * @author houbinbin
  */
-public class DocletTag {
+public class DocTag {
 
     /**
      * 行号
@@ -96,5 +98,15 @@ public class DocletTag {
      */    
     public void setParameters(String[] parameters) {
         this.parameters = parameters;
+    }
+
+    @Override
+    public String toString() {
+        return "DocTag{" +
+                "lineNum=" + lineNum +
+                ", name='" + name + '\'' +
+                ", value='" + value + '\'' +
+                ", parameters=" + Arrays.toString(parameters) +
+                '}';
     }
 }

@@ -31,4 +31,12 @@ public final class DocField extends BaseDoc {
     public void setRequired(String required) {
         this.required = required;
     }
+
+    @Override
+    public String toString() {
+        return "DocField{" +
+                "type='" + type + '\'' +
+                ", required='" + required + '\'' +
+                "} " + super.toString();
+    }
 }

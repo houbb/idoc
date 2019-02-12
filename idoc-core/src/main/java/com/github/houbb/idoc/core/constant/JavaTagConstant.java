@@ -26,4 +26,15 @@ public class JavaTagConstant {
      * 当前类已经废弃 {@value}
      */
     public static final String DEPRECATED = "deprecated";
+
+    //项目自定义信息
+
+    /**
+     * 备注
+     */
+    public static final String IDOC_REMARK = "remark";
+    /**
+     * 是否必填
+     */
+    public static final String IDOC_REQUIRE = "require";
 }

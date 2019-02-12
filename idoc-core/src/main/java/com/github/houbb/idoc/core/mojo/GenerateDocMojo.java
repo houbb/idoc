@@ -79,7 +79,7 @@ public class GenerateDocMojo extends AbstractMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
         log.info("------------------------------------ Start generate doc");
 
-        AbstractExecuteService executeService = new GenerateDocService(project, encoding);
+        AbstractExecuteService executeService = new GenerateDocService(project, encoding, generates);
         try {
             executeService.setExcludes(excludes).setIncludes(includes);
             executeService.execute();
