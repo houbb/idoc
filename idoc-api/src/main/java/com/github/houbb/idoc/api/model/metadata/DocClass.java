@@ -3,8 +3,9 @@ package com.github.houbb.idoc.api.model.metadata;
 import java.util.List;
 
 /**
+ * 类信息
  * @author binbin.hou
- * date 2019/2/11
+ * @since 0.0.1
  */
 public class DocClass extends BaseDoc {
 

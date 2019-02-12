@@ -3,8 +3,7 @@ package com.github.houbb.idoc.core.constant;
 /**
  * [javadoc](https://docs.oracle.com/javase/7/docs/technotes/tools/windows/javadoc.html)
  * @author bbhou
- * @version 1.0
- * @since JDK 1.8
+ * @version 0.0.1
  */
 public class JavaTagConstant {
 
@@ -23,7 +22,7 @@ public class JavaTagConstant {
     public static final String RETURN  = "return";
 
     /**
-     * 当前类已经废弃 {@value}
+     * 当前类已经废弃 {@value} {@link}
      */
     public static final String DEPRECATED = "deprecated";
 

@@ -17,6 +17,7 @@ import java.util.List;
 
 /**
  * 处理单个的类文件
+ * TODO: since 等共有属性的获取
  * @author binbin.hou
  * date 2019/2/11
  */
@@ -50,8 +51,7 @@ public class GenerateDocClassHandler implements JavaClassHandler {
         docClass.setFullName(javaClass.getFullyQualifiedName());
 
         // java 默认的字段
-        if(javaClass.isPrivate()
-            || javaClass.getFullyQualifiedName().startsWith("java.")) {
+        if(isPrimitiveOrJdk(javaClass.asType())) {
             return docClass;
         }
 
@@ -247,10 +247,7 @@ public class GenerateDocClassHandler implements JavaClassHandler {
      * @return 是否
      */
     private boolean isPrimitiveOrJdk(final Type type) {
-        if(type.isPrimitive()
-            || type.getFullyQualifiedName().startsWith("java.")) {
-            return true;
-        }
-        return false;
+        return type.isPrimitive()
+                || type.getFullyQualifiedName().startsWith("java.");
     }
 }
