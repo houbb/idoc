@@ -5,6 +5,7 @@ import java.util.Arrays;
 /**
  * doclet 标签值对象
  * @author houbinbin
+ * @since 0.0.1
  */
 public class DocTag {
 

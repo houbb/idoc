@@ -6,6 +6,8 @@ import com.github.houbb.idoc.core.exception.IDocRuntimeException;
 import com.github.houbb.idoc.core.handler.Handler;
 import com.github.houbb.idoc.core.handler.JavaClassHandler;
 import com.github.houbb.idoc.core.util.ArrayUtil;
+import com.github.houbb.idoc.core.util.CollectionUtil;
+import com.github.houbb.idoc.core.util.JavaClassUtil;
 import com.github.houbb.idoc.core.util.ObjectUtil;
 import com.github.houbb.log.integration.core.Log;
 import com.github.houbb.log.integration.core.LogFactory;
@@ -15,6 +17,7 @@ import java.util.List;
 
 /**
  * 处理单个的类文件
+ * TODO: since 等共有属性的获取
  * @author binbin.hou
  * date 2019/2/11
  */
@@ -29,8 +32,6 @@ public class GenerateDocClassHandler implements JavaClassHandler {
     public DocClass handle(JavaClass javaClass) throws IDocRuntimeException {
         return buildDocClass(javaClass);
     }
-
-
 
 
     /**
@@ -50,8 +51,7 @@ public class GenerateDocClassHandler implements JavaClassHandler {
         docClass.setFullName(javaClass.getFullyQualifiedName());
 
         // java 默认的字段
-        if(javaClass.isPrivate()
-            || javaClass.getFullyQualifiedName().startsWith("java.")) {
+        if(isPrimitiveOrJdk(javaClass.asType())) {
             return docClass;
         }
 
@@ -68,8 +68,8 @@ public class GenerateDocClassHandler implements JavaClassHandler {
         docClass.setDocAnnotationList(buildDocAnnotationList(annotations));
 
         // 字段信息
-        final JavaField[] javaFields = javaClass.getFields();
-        docClass.setDocFieldList(buildDocFieldList(javaFields));
+        final List<JavaField> javaFieldList = JavaClassUtil.getAllJavaFieldList(javaClass);
+        docClass.setDocFieldList(buildDocFieldList(javaFieldList));
 
         // 方法信息
         final JavaMethod[] javaMethods = javaClass.getMethods();
@@ -115,18 +115,17 @@ public class GenerateDocClassHandler implements JavaClassHandler {
 
     /**
      * 构建文档字段信息列表
-     * @param javaFields 文档字段数组
+     * @param javaFieldList 文档字段列表
      * @return 列表结果
      */
-    private List<DocField> buildDocFieldList(final JavaField[] javaFields) {
-        return ArrayUtil.buildList(javaFields, new Handler<JavaField, DocField>(){
+    private List<DocField> buildDocFieldList(final List<JavaField> javaFieldList) {
+        return CollectionUtil.buildList(javaFieldList, new Handler<JavaField, DocField>(){
             @Override
             public DocField handle(JavaField javaField) throws IDocRuntimeException {
                 DocField docField = new DocField();
                 docField.setName(javaField.getName());
                 docField.setType(javaField.getType().getFullyQualifiedName());
                 docField.setComment(javaField.getComment());
-                //TODO: 是否必填+备注
                 // 使用 doclet，缺点：严格的 java-doc 会报错
                 // 使用判断的方式，会导致处理其他特别麻烦。
                 DocletTag requireTag = javaField.getTagByName(JavaTagConstant.IDOC_REQUIRE);
@@ -217,7 +216,9 @@ public class GenerateDocClassHandler implements JavaClassHandler {
                 // 如何判断是否为用户自定义类型：让用户指定自己的包名称前缀。
                 // 常规的判断方式，排除掉 jdk 自带的类型，其他全部为自定义类型。(推荐这种方式)
                 if(!isPrimitiveOrJdk(javaParameter.getType())) {
-                    docParameter.setDocFieldList(buildDocFieldList(javaParameter.getType().getJavaClass().getFields()));
+                    final List<JavaField> javaFieldList = JavaClassUtil
+                            .getAllJavaFieldList(javaParameter.getType().getJavaClass());
+                    docParameter.setDocFieldList(buildDocFieldList(javaFieldList));
                 }
                 DocletTag[] docletTags = javaMethod.getTagsByName(JavaTagConstant.PARAM);
                 if(ArrayUtil.isNotEmpty(docletTags)) {
@@ -246,10 +247,7 @@ public class GenerateDocClassHandler implements JavaClassHandler {
      * @return 是否
      */
     private boolean isPrimitiveOrJdk(final Type type) {
-        if(type.isPrimitive()
-            || type.getFullyQualifiedName().startsWith("java.")) {
-            return true;
-        }
-        return false;
+        return type.isPrimitive()
+                || type.getFullyQualifiedName().startsWith("java.");
     }
 }

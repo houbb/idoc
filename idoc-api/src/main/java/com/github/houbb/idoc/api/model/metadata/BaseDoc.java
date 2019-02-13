@@ -1,11 +1,11 @@
 package com.github.houbb.idoc.api.model.metadata;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
+ * 基础信息
  * @author binbin.hou
- * date 2019/2/11
+ * @since 0.0.1
  */
 public class BaseDoc {
 
@@ -14,6 +14,16 @@ public class BaseDoc {
      * 备注：用户可以指定版本号，过滤生成文档信息
      */
     private String since;
+
+    /**
+     * 版本信息
+     */
+    private String version;
+
+    /**
+     * 作者列表
+     */
+    private List<String> authorList;
 
     /**
      * 名称
@@ -44,6 +54,11 @@ public class BaseDoc {
      * doc 注解列表
      */
     private List<DocAnnotation> docAnnotationList;
+
+    /**
+     * 参见列表
+     */
+    private List<DocClass> seeList;
 
     public String getSince() {
         return since;
@@ -101,16 +116,27 @@ public class BaseDoc {
         this.docAnnotationList = docAnnotationList;
     }
 
-    @Override
-    public String toString() {
-        return "BaseDoc{" +
-                "since='" + since + '\'' +
-                ", name='" + name + '\'' +
-                ", comment='" + comment + '\'' +
-                ", remark='" + remark + '\'' +
-                ", modifiers=" + Arrays.toString(modifiers) +
-                ", docTagList=" + docTagList +
-                ", docAnnotationList=" + docAnnotationList +
-                '}';
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public List<String> getAuthorList() {
+        return authorList;
+    }
+
+    public void setAuthorList(List<String> authorList) {
+        this.authorList = authorList;
+    }
+
+    public List<DocClass> getSeeList() {
+        return seeList;
+    }
+
+    public void setSeeList(List<DocClass> seeList) {
+        this.seeList = seeList;
     }
 }

@@ -4,6 +4,7 @@ import com.github.houbb.log.integration.core.Log;
 import com.github.houbb.log.integration.core.LogFactory;
 import com.thoughtworks.qdox.JavaDocBuilder;
 import com.thoughtworks.qdox.model.JavaClass;
+import com.thoughtworks.qdox.model.JavaField;
 import com.thoughtworks.qdox.parser.ParseException;
 import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -260,4 +261,27 @@ public final class JavaClassUtil {
         }
         return null;
     }
+
+    /**
+     * 获取指定类的所有字段信息
+     * @param javaClass 类信息
+     * @return 字段列表
+     */
+    public static List<JavaField> getAllJavaFieldList(final JavaClass javaClass) {
+        if(ObjectUtil.isNull(javaClass)) {
+            return Collections.emptyList();
+        }
+        List<JavaField> javaFieldList = new ArrayList<>();
+        // 当前类
+        CollectionUtil.addArray(javaFieldList, javaClass.getFields());
+        //处理父类信息-这里的 parentClass 是空的
+        JavaClass supperClass = javaClass.getSuperJavaClass();
+        while (supperClass != null
+            && !"java.lang.Object".equals(supperClass.getFullyQualifiedName())) {
+            CollectionUtil.addArray(javaFieldList, supperClass.getFields());
+            supperClass = supperClass.getSuperJavaClass();
+        }
+        return javaFieldList;
+    }
+
 }

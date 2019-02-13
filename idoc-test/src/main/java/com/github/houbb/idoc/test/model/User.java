@@ -7,7 +7,7 @@ import java.util.Date;
  * @author binbin.hou
  * date 2019/2/12
  */
-public class User {
+public class User extends Person {
 
     /**
      * 名称
