@@ -72,5 +72,10 @@
             <artifactId>freemarker</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.deepoove</groupId>
+            <artifactId>poi-tl</artifactId>
+        </dependency>
+
     </dependencies>
 </project>
