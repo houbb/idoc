@@ -1,8 +1,8 @@
 package com.github.houbb.idoc.core.handler.impl;
 
+import com.github.houbb.idoc.api.exception.IDocRuntimeException;
 import com.github.houbb.idoc.api.model.metadata.*;
 import com.github.houbb.idoc.core.constant.JavaTagConstant;
-import com.github.houbb.idoc.core.exception.IDocRuntimeException;
 import com.github.houbb.idoc.core.handler.Handler;
 import com.github.houbb.idoc.core.handler.JavaClassHandler;
 import com.github.houbb.idoc.core.util.ArrayUtil;

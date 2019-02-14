@@ -1,7 +1,7 @@
 package com.github.houbb.idoc.core.core;
 
 
-import com.github.houbb.idoc.core.exception.IDocRuntimeException;
+import com.github.houbb.idoc.api.exception.IDocRuntimeException;
 
 /**
  * 所有方法的统一执行入口。

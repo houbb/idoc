@@ -1,6 +1,6 @@
 package com.github.houbb.idoc.core.handler;
 
-import com.github.houbb.idoc.core.exception.IDocRuntimeException;
+import com.github.houbb.idoc.api.exception.IDocRuntimeException;
 
 /**
  * 处理

@@ -1,8 +1,9 @@
-package com.github.houbb.idoc.core.exception;
+package com.github.houbb.idoc.api.exception;
 
 /**
+ * 运行时异常
  * @author binbin.hou
- * date 2019/2/11
+ * @since 0.0.1
  */
 public class IDocRuntimeException extends RuntimeException {
 
@@ -24,5 +25,4 @@ public class IDocRuntimeException extends RuntimeException {
     public IDocRuntimeException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
-
 }

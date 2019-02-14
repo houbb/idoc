@@ -1,5 +1,6 @@
-package com.github.houbb.idoc.api.core;
+package com.github.houbb.idoc.api.core.genenrator;
 
+import com.github.houbb.idoc.api.config.IDocConfig;
 import com.github.houbb.idoc.api.model.metadata.DocClass;
 
 import java.util.Collection;
@@ -25,5 +26,11 @@ public interface IDocGenerator {
      * @param docClasses 文档类原始信息
      */
     void generate(final Collection<DocClass> docClasses);
+
+    /**
+     * 获取文档配置信息
+     * @return 配置信息
+     */
+    IDocConfig getDocConfig();
 
 }

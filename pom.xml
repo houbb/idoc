@@ -13,6 +13,8 @@
         <module>idoc-api</module>
         <module>idoc-core</module>
         <module>idoc-test</module>
+        <module>idoc-ftl</module>
+        <module>idoc-poi</module>
     </modules>
 
     <properties>
@@ -33,6 +35,7 @@
 
         <!--============================== INTER ==============================-->
         <log-integration.version>1.1.2</log-integration.version>
+        <paradise.version>1.1.1</paradise.version>
 
         <!--============================== INTER ==============================-->
         <maven-plugin-api.version>3.0</maven-plugin-api.version>
@@ -43,6 +46,9 @@
         <qdox.version>1.12.1</qdox.version>
         <junit.version>4.12</junit.version>
         <freemarker.version>2.3.23</freemarker.version>
+        <poi.version>3.9</poi.version>
+        <poi-ooxml-schemas.version>3.9</poi-ooxml-schemas.version>
+        <poi-ooxml.version>3.7</poi-ooxml.version>
     </properties>
 
     <dependencyManagement>
@@ -53,12 +59,27 @@
                 <artifactId>idoc-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.github.houbb</groupId>
+                <artifactId>idoc-ftl</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.houbb</groupId>
+                <artifactId>idoc-poi</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!--============================== INTER ==============================-->
             <dependency>
                 <groupId>com.github.houbb</groupId>
                 <artifactId>log-integration</artifactId>
                 <version>${log-integration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.houbb</groupId>
+                <artifactId>paradise-common</artifactId>
+                <version>${paradise.version}</version>
             </dependency>
 
             <!--============================== MAVEN ==============================-->
@@ -100,21 +121,26 @@
             </dependency>
 
             <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
-                <version>1.2.27</version>
-            </dependency>
-
-            <dependency>
                 <groupId>org.freemarker</groupId>
                 <artifactId>freemarker</artifactId>
                 <version>${freemarker.version}</version>
             </dependency>
 
+            <!--poi-->
             <dependency>
-                <groupId>com.deepoove</groupId>
-                <artifactId>poi-tl</artifactId>
-                <version>1.4.2</version>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi-ooxml.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml-schemas</artifactId>
+                <version>${poi-ooxml-schemas.version}</version>
             </dependency>
 
         </dependencies>
