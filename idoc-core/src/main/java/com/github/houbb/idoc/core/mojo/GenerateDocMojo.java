@@ -14,7 +14,7 @@ import org.apache.maven.settings.Settings;
 
 /**
  * @author binbin.hou
- * date 2019/2/11
+ * @since 0.0.1
  */
 @Mojo(name = "idoc")
 public class GenerateDocMojo extends AbstractMojo {

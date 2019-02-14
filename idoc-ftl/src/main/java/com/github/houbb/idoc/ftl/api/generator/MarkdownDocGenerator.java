@@ -54,12 +54,18 @@ public class MarkdownDocGenerator extends AbstractDocGenerator {
     /**
      * 项目信息
      */
-    private final MavenProject project;
+    private MavenProject project;
 
     /**
      * 编码
      */
-    private final String encoding;
+    private String encoding;
+
+    /**
+     * 必须要有空构造器
+     */
+    public MarkdownDocGenerator() {
+    }
 
     public MarkdownDocGenerator(final MavenProject project, final String encoding) {
         this.project = project;
@@ -97,7 +103,7 @@ public class MarkdownDocGenerator extends AbstractDocGenerator {
 
         // 这里等后期才变成可以自由配置的
         String targetFile = targetPath + MarkdownConstant.Generate.IDOC_MARKDOWN_ALL_IN_ONE;
-        log.info("Markdown 生成文件信息: {}", targetFile);
+        log.info("Markdown 生成文件路径: {}", targetFile);
         FreemarkerUtil.createFile(template, targetFile, root, isOverwriteWhenExists);
     }
 

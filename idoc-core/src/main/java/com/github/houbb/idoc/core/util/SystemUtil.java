@@ -8,7 +8,7 @@ package com.github.houbb.idoc.core.util;
 /**
  * 系统工具类
  * @author bbhou
- * @version 1.0.0
+ * @since 0.0.1
  */
 public final class SystemUtil {
 

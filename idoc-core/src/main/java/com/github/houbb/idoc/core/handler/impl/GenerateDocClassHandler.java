@@ -19,7 +19,7 @@ import java.util.List;
  * 处理单个的类文件
  * TODO: since 等共有属性的获取
  * @author binbin.hou
- * date 2019/2/11
+ * @since 0.0.1
  */
 public class GenerateDocClassHandler implements JavaClassHandler {
 

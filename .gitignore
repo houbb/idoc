@@ -35,3 +35,6 @@ Thumbs.db
 *.xls
 *.xlsx
 
+# idoc
+idoc-gen
+

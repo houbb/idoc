@@ -9,7 +9,6 @@ import com.github.houbb.paradise.common.constant.MavenConstant;
  */
 public final class MarkdownConstant {
 
-
     /**
      * 模板
      */

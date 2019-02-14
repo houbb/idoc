@@ -7,7 +7,7 @@ package com.github.houbb.idoc.core.util.thoughtworks;
 
 /**
  * @author binbin.hou
- * date 2019/2/12
+ * @since 0.0.1
  */
 public class DocletTagUtil {
 }

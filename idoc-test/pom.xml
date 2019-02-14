@@ -27,6 +27,11 @@
                 <groupId>com.github.houbb</groupId>
                 <artifactId>idoc-core</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
+                <configuration>
+                    <generates>
+                        <generate>com.github.houbb.idoc.ftl.api.generator.MarkdownDocGenerator</generate>
+                    </generates>
+                </configuration>
             </plugin>
         </plugins>
     </build>

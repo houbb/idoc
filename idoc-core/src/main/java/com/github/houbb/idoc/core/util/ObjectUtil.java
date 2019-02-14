@@ -2,7 +2,7 @@ package com.github.houbb.idoc.core.util;
 
 /**
  * @author binbin.hou
- * date 2019/2/11
+ * @since 0.0.1
  */
 public final class ObjectUtil {
 

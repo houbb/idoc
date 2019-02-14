@@ -24,12 +24,12 @@ public class ConsoleDocGenerator extends AbstractDocGenerator {
     @Override
     public void generate(Collection<DocClass> docClasses) {
         if(CollectionUtil.isEmpty(docClasses)) {
-            log.info("----------------------------------- 文档列表为空");
+            log.info("------------------------------------ 文档列表为空");
         }
 
-        log.info("----------------------------------- 文档信息如下：");
+        log.info("------------------------------------ 文档信息如下：");
         for(DocClass docClass : docClasses) {
-            log.info("----------------------------------- 类名" + docClass.getFullName());
+            log.info("[类名] " + docClass.getFullName());
         }
     }
 }

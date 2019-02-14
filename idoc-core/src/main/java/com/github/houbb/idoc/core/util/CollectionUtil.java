@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * 集合工具类
  * @author binbin.hou
- * date 2019/2/11
+ * @since 0.0.1
  */
 public final class CollectionUtil {
 
