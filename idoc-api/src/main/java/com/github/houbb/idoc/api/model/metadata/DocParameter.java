@@ -15,7 +15,7 @@ public final class DocParameter extends BaseDoc {
     private String type;
 
     /**
-     * 当前方法下面的字段信息
+     * 当前入参下面的字段信息
      */
     private List<DocField> docFieldList;
 

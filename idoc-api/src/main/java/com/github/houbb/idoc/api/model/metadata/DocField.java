@@ -1,5 +1,7 @@
 package com.github.houbb.idoc.api.model.metadata;
 
+import java.util.List;
+
 /**
  * 字段信息
  * @author binbin.hou
@@ -17,6 +19,11 @@ public final class DocField extends BaseDoc {
      */
     private String required;
 
+    /**
+     * 当前入参下面的字段信息
+     */
+    private List<DocField> docFieldList;
+
     public String getType() {
         return type;
     }
@@ -33,11 +40,11 @@ public final class DocField extends BaseDoc {
         this.required = required;
     }
 
-    @Override
-    public String toString() {
-        return "DocField{" +
-                "type='" + type + '\'' +
-                ", required='" + required + '\'' +
-                "} " + super.toString();
+    public List<DocField> getDocFieldList() {
+        return docFieldList;
+    }
+
+    public void setDocFieldList(List<DocField> docFieldList) {
+        this.docFieldList = docFieldList;
     }
 }
