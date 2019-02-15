@@ -45,7 +45,7 @@ public final class CollectionUtil {
      * @param <R> 出参
      * @return 结果
      */
-    public static <T, R> List<R> buildList(final List<T> targets, final IHandler<T, R> handler) {
+    public static <T, R> List<R> buildList(final Collection<T> targets, final IHandler<T, R> handler) {
         if(isEmpty(targets)) {
             return Collections.emptyList();
         }

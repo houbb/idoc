@@ -4,6 +4,9 @@ import com.github.houbb.idoc.api.config.IDocConfig;
 import com.github.houbb.idoc.api.core.genenrator.AbstractDocGenerator;
 import com.github.houbb.idoc.api.model.metadata.DocClass;
 import com.github.houbb.idoc.common.exception.IDocRuntimeException;
+import com.github.houbb.idoc.common.handler.impl.simplify.SimplifyClassHandler;
+import com.github.houbb.idoc.common.model.SimplifyDocClass;
+import com.github.houbb.idoc.common.util.CollectionUtil;
 import com.github.houbb.idoc.common.util.SystemUtil;
 import com.github.houbb.idoc.ftl.constant.MarkdownConstant;
 import com.github.houbb.idoc.ftl.util.FreemarkerUtil;
@@ -24,6 +27,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -95,13 +99,19 @@ public class MarkdownDocGenerator extends AbstractDocGenerator {
         Path path = Paths.get(targetPath);
         File file = path.toFile();
         boolean makeDirs = file.mkdirs();
+        if(!makeDirs) {
+            log.error("目标文件夹创建失败，执行中断：{}", targetPath);
+            throw new IDocRuntimeException("目标文件夹创建失败，执行中断！");
+        }
 
         //2.0 生成对应的文件
+        List<SimplifyDocClass> simplifyDocClasses = CollectionUtil.buildList(docClasses, new SimplifyClassHandler());
 
         Map<String, Object> root = new HashMap<>();
         root.put("author", SystemUtil.getCurrentUserName());
         root.put("version", project.getVersion());
         root.put("today", DateUtil.getSimpleDateStr());
+        root.put("classes", simplifyDocClasses);
 
         // 这里等后期才变成可以自由配置的
         String targetFile = targetPath + MarkdownConstant.Generate.IDOC_MARKDOWN_ALL_IN_ONE;

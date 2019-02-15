@@ -2,16 +2,13 @@
 
 当前文档由 [i-doc](https://github.com/houbb/idoc) 自动生成于 ${today}。
 
-# 类名称
+<#if classes ?? && classes.size() > 0>
+    <#list classes as class>
+# ${class.name}-${class.comment}
 
-类简介
+${class.remark}
 
-版本
-
-作者
-
-## 方法目录
-
+<#if class.methods ?? && class.methods.size() > 0>
 ## 方法1
 
 方法说明
@@ -27,3 +24,9 @@
 ### 方法入参
 
 ### 方法出参
+</#if>
+
+    </#list>
+</#if>
+
+
