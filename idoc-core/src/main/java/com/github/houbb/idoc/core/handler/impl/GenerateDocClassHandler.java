@@ -1,23 +1,34 @@
 package com.github.houbb.idoc.core.handler.impl;
 
-import com.github.houbb.idoc.api.exception.IDocRuntimeException;
-import com.github.houbb.idoc.api.model.metadata.*;
+import com.github.houbb.idoc.api.model.metadata.DocAnnotation;
+import com.github.houbb.idoc.api.model.metadata.DocClass;
+import com.github.houbb.idoc.api.model.metadata.DocField;
+import com.github.houbb.idoc.api.model.metadata.DocMethod;
+import com.github.houbb.idoc.api.model.metadata.DocParameter;
+import com.github.houbb.idoc.api.model.metadata.DocTag;
+import com.github.houbb.idoc.common.handler.IHandler;
+import com.github.houbb.idoc.common.util.ArrayUtil;
+import com.github.houbb.idoc.common.util.CollectionUtil;
+import com.github.houbb.idoc.common.util.ObjectUtil;
 import com.github.houbb.idoc.core.constant.JavaTagConstant;
-import com.github.houbb.idoc.core.handler.Handler;
 import com.github.houbb.idoc.core.handler.JavaClassHandler;
-import com.github.houbb.idoc.core.util.ArrayUtil;
-import com.github.houbb.idoc.core.util.CollectionUtil;
 import com.github.houbb.idoc.core.util.JavaClassUtil;
-import com.github.houbb.idoc.core.util.ObjectUtil;
 import com.github.houbb.log.integration.core.Log;
 import com.github.houbb.log.integration.core.LogFactory;
-import com.thoughtworks.qdox.model.*;
+import com.thoughtworks.qdox.model.Annotation;
+import com.thoughtworks.qdox.model.DocletTag;
+import com.thoughtworks.qdox.model.JavaClass;
+import com.thoughtworks.qdox.model.JavaField;
+import com.thoughtworks.qdox.model.JavaMethod;
+import com.thoughtworks.qdox.model.JavaParameter;
+import com.thoughtworks.qdox.model.Type;
 
 import java.util.List;
 
 /**
  * 处理单个的类文件
  * TODO: since 等共有属性的获取
+ *
  * @author binbin.hou
  * @since 0.0.1
  */
@@ -29,18 +40,19 @@ public class GenerateDocClassHandler implements JavaClassHandler {
     private final Log log = LogFactory.getLog(GenerateDocClassHandler.class);
 
     @Override
-    public DocClass handle(JavaClass javaClass) throws IDocRuntimeException {
+    public DocClass handle(JavaClass javaClass) {
         return buildDocClass(javaClass);
     }
 
 
     /**
      * 构建 docClass 信息
+     *
      * @param javaClass java class 信息
      * @return docClass 信息
      */
     private DocClass buildDocClass(final JavaClass javaClass) {
-        if(ObjectUtil.isNull(javaClass)) {
+        if (ObjectUtil.isNull(javaClass)) {
             return null;
         }
 
@@ -51,7 +63,7 @@ public class GenerateDocClassHandler implements JavaClassHandler {
         docClass.setFullName(javaClass.getFullyQualifiedName());
 
         // java 默认的字段
-        if(isPrimitiveOrJdk(javaClass.asType())) {
+        if (isPrimitiveOrJdk(javaClass.asType())) {
             return docClass;
         }
 
@@ -80,13 +92,14 @@ public class GenerateDocClassHandler implements JavaClassHandler {
 
     /**
      * 构建标签信息
+     *
      * @param docletTagArray 原始信息
      * @return 构建后的信息
      */
     private List<DocTag> buildDocTagList(final DocletTag[] docletTagArray) {
-        return ArrayUtil.buildList(docletTagArray, new Handler<DocletTag, DocTag>() {
+        return ArrayUtil.buildList(docletTagArray, new IHandler<DocletTag, DocTag>() {
             @Override
-            public DocTag handle(DocletTag docletTag) throws IDocRuntimeException {
+            public DocTag handle(DocletTag docletTag) {
                 DocTag docTag = new DocTag();
                 docTag.setName(docletTag.getName());
                 docTag.setLineNum(docletTag.getLineNumber());
@@ -100,13 +113,14 @@ public class GenerateDocClassHandler implements JavaClassHandler {
     /**
      * 构建类注解信息
      * TODO：不重要
+     *
      * @param annotations 注解
      * @return 构建结果
      */
     private List<DocAnnotation> buildDocAnnotationList(final Annotation[] annotations) {
-        return ArrayUtil.buildList(annotations, new Handler<Annotation, DocAnnotation>() {
+        return ArrayUtil.buildList(annotations, new IHandler<Annotation, DocAnnotation>() {
             @Override
-            public DocAnnotation handle(Annotation annotation) throws IDocRuntimeException {
+            public DocAnnotation handle(Annotation annotation) {
                 return null;
             }
         });
@@ -115,13 +129,14 @@ public class GenerateDocClassHandler implements JavaClassHandler {
 
     /**
      * 构建文档字段信息列表
+     *
      * @param javaFieldList 文档字段列表
      * @return 列表结果
      */
     private List<DocField> buildDocFieldList(final List<JavaField> javaFieldList) {
-        return CollectionUtil.buildList(javaFieldList, new Handler<JavaField, DocField>(){
+        return CollectionUtil.buildList(javaFieldList, new IHandler<JavaField, DocField>() {
             @Override
-            public DocField handle(JavaField javaField) throws IDocRuntimeException {
+            public DocField handle(JavaField javaField) {
                 DocField docField = new DocField();
                 docField.setName(javaField.getName());
                 docField.setType(javaField.getType().getFullyQualifiedName());
@@ -131,10 +146,10 @@ public class GenerateDocClassHandler implements JavaClassHandler {
                 DocletTag requireTag = javaField.getTagByName(JavaTagConstant.IDOC_REQUIRE);
                 DocletTag remarkTag = javaField.getTagByName(JavaTagConstant.IDOC_REMARK);
 
-                if(ObjectUtil.isNotNull(requireTag)) {
+                if (ObjectUtil.isNotNull(requireTag)) {
                     docField.setRequired(requireTag.getValue());
                 }
-                if(ObjectUtil.isNotNull(remarkTag)) {
+                if (ObjectUtil.isNotNull(remarkTag)) {
                     docField.setRemark(remarkTag.getValue());
                 }
                 return docField;
@@ -144,20 +159,21 @@ public class GenerateDocClassHandler implements JavaClassHandler {
 
     /**
      * 构建方法列表
+     *
      * @param javaMethods 原始方法
      * @return 构建结果
      */
     private List<DocMethod> buildDocMethodList(final JavaMethod[] javaMethods) {
-        return ArrayUtil.buildList(javaMethods, new Handler<JavaMethod, DocMethod>(){
+        return ArrayUtil.buildList(javaMethods, new IHandler<JavaMethod, DocMethod>() {
             @Override
-            public DocMethod handle(JavaMethod javaMethod) throws IDocRuntimeException {
+            public DocMethod handle(JavaMethod javaMethod) {
                 DocMethod docMethod = new DocMethod();
                 docMethod.setName(javaMethod.getName());
                 docMethod.setComment(javaMethod.getComment());
                 docMethod.setSignature(javaMethod.getCallSignature());
                 docMethod.setModifiers(javaMethod.getModifiers());
                 DocletTag docletTag = javaMethod.getTagByName(JavaTagConstant.SINCE);
-                if(ObjectUtil.isNotNull(docletTag)) {
+                if (ObjectUtil.isNotNull(docletTag)) {
                     docMethod.setSince(docletTag.getValue());
                 }
 
@@ -179,16 +195,17 @@ public class GenerateDocClassHandler implements JavaClassHandler {
 
     /**
      * 构建返回类型
+     *
      * @param javaMethod java 方法
      * @return 结果
      */
     private DocClass buildDocReturnClass(final JavaMethod javaMethod) {
-        JavaClass returnClass = javaMethod.getReturnType()==null ? null : javaMethod.getReturnType().getJavaClass();
+        JavaClass returnClass = javaMethod.getReturnType() == null ? null : javaMethod.getReturnType().getJavaClass();
         DocClass docClass = buildDocClass(returnClass);
 
         // 注释
         DocletTag docletTag = javaMethod.getTagByName(JavaTagConstant.RETURN);
-        if(ObjectUtil.isNotNull(docletTag)) {
+        if (ObjectUtil.isNotNull(docletTag)) {
             docClass.setMethodComment(docletTag.getValue());
         }
         return docClass;
@@ -197,14 +214,15 @@ public class GenerateDocClassHandler implements JavaClassHandler {
     /**
      * 构建参数
      * TODO: 对于集合类型的考虑 Array Collection Map
+     *
      * @param javaParameters 方法参数
-     * @param javaMethod 方法
+     * @param javaMethod     方法
      * @return 结果信息
      */
     private List<DocParameter> buildDocParameterList(final JavaParameter[] javaParameters, final JavaMethod javaMethod) {
-        return ArrayUtil.buildList(javaParameters, new Handler<JavaParameter, DocParameter>() {
+        return ArrayUtil.buildList(javaParameters, new IHandler<JavaParameter, DocParameter>() {
             @Override
-            public DocParameter handle(JavaParameter javaParameter) throws IDocRuntimeException {
+            public DocParameter handle(JavaParameter javaParameter) {
                 final String paramName = javaParameter.getName();
                 DocParameter docParameter = new DocParameter();
                 docParameter.setName(paramName);
@@ -215,21 +233,21 @@ public class GenerateDocClassHandler implements JavaClassHandler {
                 // 8大基本类型+Number 类型。
                 // 如何判断是否为用户自定义类型：让用户指定自己的包名称前缀。
                 // 常规的判断方式，排除掉 jdk 自带的类型，其他全部为自定义类型。(推荐这种方式)
-                if(!isPrimitiveOrJdk(javaParameter.getType())) {
+                if (!isPrimitiveOrJdk(javaParameter.getType())) {
                     final List<JavaField> javaFieldList = JavaClassUtil
                             .getAllJavaFieldList(javaParameter.getType().getJavaClass());
                     docParameter.setDocFieldList(buildDocFieldList(javaFieldList));
                 }
                 DocletTag[] docletTags = javaMethod.getTagsByName(JavaTagConstant.PARAM);
-                if(ArrayUtil.isNotEmpty(docletTags)) {
-                    for(DocletTag docletTag : docletTags) {
+                if (ArrayUtil.isNotEmpty(docletTags)) {
+                    for (DocletTag docletTag : docletTags) {
                         String[] strings = docletTag.getParameters();
                         // 根据名称的指定信息做匹配
                         //1. 第一个参数是名称
                         //2. 第二个参数是值
-                        if(ArrayUtil.isNotEmpty(strings)
-                            && paramName.equalsIgnoreCase(strings[0])
-                            && strings.length >= 2) {
+                        if (ArrayUtil.isNotEmpty(strings)
+                                && paramName.equalsIgnoreCase(strings[0])
+                                && strings.length >= 2) {
                             docParameter.setComment(strings[1]);
                             break;
                         }
@@ -243,6 +261,7 @@ public class GenerateDocClassHandler implements JavaClassHandler {
 
     /**
      * 是否为 jdk 默认的对象类型
+     *
      * @param type 类型
      * @return 是否
      */

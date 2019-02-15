@@ -1,4 +1,9 @@
-package com.github.houbb.idoc.api.exception;
+/*
+ * Copyright (c)  2019. houbinbin Inc.
+ * idoc All rights reserved.
+ */
+
+package com.github.houbb.idoc.common.exception;
 
 /**
  * 运行时异常

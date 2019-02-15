@@ -1,4 +1,9 @@
-package com.github.houbb.idoc.core.util;
+/*
+ * Copyright (c)  2019. houbinbin Inc.
+ * idoc All rights reserved.
+ */
+
+package com.github.houbb.idoc.common.util;
 
 import java.text.DecimalFormat;
 
@@ -132,7 +137,7 @@ public class ConsoleProgressBar {
      * 主要    
      *    
      * @param args ARGS    
-     * @throws java.lang.InterruptedException if any
+     * @throws InterruptedException if any
      */    
     public static void main(String[] args) throws InterruptedException {
         ConsoleProgressBar cpb = new ConsoleProgressBar(0, 100, 100, '=');

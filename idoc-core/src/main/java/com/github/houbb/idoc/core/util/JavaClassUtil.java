@@ -1,5 +1,7 @@
 package com.github.houbb.idoc.core.util;
 
+import com.github.houbb.idoc.common.util.CollectionUtil;
+import com.github.houbb.idoc.common.util.ObjectUtil;
 import com.github.houbb.log.integration.core.Log;
 import com.github.houbb.log.integration.core.LogFactory;
 import com.thoughtworks.qdox.JavaDocBuilder;

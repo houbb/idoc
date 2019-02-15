@@ -15,6 +15,7 @@
         <module>idoc-test</module>
         <module>idoc-ftl</module>
         <module>idoc-poi</module>
+        <module>idoc-common</module>
     </modules>
 
     <properties>
@@ -57,6 +58,11 @@
             <dependency>
                 <groupId>com.github.houbb</groupId>
                 <artifactId>idoc-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.houbb</groupId>
+                <artifactId>idoc-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

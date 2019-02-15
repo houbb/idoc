@@ -1,6 +1,11 @@
-package com.github.houbb.idoc.core.util;
+/*
+ * Copyright (c)  2019. houbinbin Inc.
+ * idoc All rights reserved.
+ */
 
-import com.github.houbb.idoc.core.handler.Handler;
+package com.github.houbb.idoc.common.util;
+
+import com.github.houbb.idoc.common.handler.IHandler;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,7 +39,7 @@ public final class ArrayUtil {
      * @param <R> 出参
      * @return 结果
      */
-    public static <T, R> List<R> buildList(final T[] targets, final Handler<T, R> handler) {
+    public static <T, R> List<R> buildList(final T[] targets, final IHandler<T, R> handler) {
         if(isEmpty(targets)) {
             return Collections.emptyList();
         }

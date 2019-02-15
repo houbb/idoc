@@ -16,7 +16,7 @@
         <!--============================== SELF ==============================-->
         <dependency>
             <groupId>com.github.houbb</groupId>
-            <artifactId>idoc-api</artifactId>
+            <artifactId>idoc-common</artifactId>
         </dependency>
 
         <!--============================== INTER ==============================-->

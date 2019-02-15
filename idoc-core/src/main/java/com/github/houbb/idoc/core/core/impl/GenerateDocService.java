@@ -1,12 +1,12 @@
 package com.github.houbb.idoc.core.core.impl;
 
 import com.github.houbb.idoc.api.core.genenrator.IDocGenerator;
-import com.github.houbb.idoc.api.exception.IDocRuntimeException;
 import com.github.houbb.idoc.api.model.metadata.DocClass;
+import com.github.houbb.idoc.common.exception.IDocRuntimeException;
+import com.github.houbb.idoc.common.util.ArrayUtil;
 import com.github.houbb.idoc.core.api.generator.ConsoleDocGenerator;
 import com.github.houbb.idoc.core.handler.JavaClassHandler;
 import com.github.houbb.idoc.core.handler.impl.GenerateDocClassHandler;
-import com.github.houbb.idoc.core.util.ArrayUtil;
 import com.github.houbb.idoc.ftl.api.generator.MarkdownDocGenerator;
 import com.github.houbb.log.integration.core.Log;
 import com.github.houbb.log.integration.core.LogFactory;

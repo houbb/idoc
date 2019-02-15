@@ -3,15 +3,18 @@
  * idoc All rights reserved.
  */
 
-package com.github.houbb.idoc.core.util;
+package com.github.houbb.idoc.common.util;
 
-import com.github.houbb.idoc.core.handler.Handler;
+
+import com.github.houbb.idoc.common.handler.IHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
+import javax.xml.ws.handler.Handler;
 
 /**
  * 集合工具类
@@ -42,7 +45,7 @@ public final class CollectionUtil {
      * @param <R> 出参
      * @return 结果
      */
-    public static <T, R> List<R> buildList(final List<T> targets, final Handler<T, R> handler) {
+    public static <T, R> List<R> buildList(final List<T> targets, final IHandler<T, R> handler) {
         if(isEmpty(targets)) {
             return Collections.emptyList();
         }

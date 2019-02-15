@@ -15,7 +15,8 @@ import java.util.Collection;
  * 4. word
  * 5. pdf
  *
- * 用户可以使用系统内置的，也可以使用自定义的实现。
+ * 1. 用户可以使用系统内置的，也可以使用自定义的实现。
+ * 2. 一定要提供默认的无参构造器
  * @author binbin.hou
  * @since 0.0.1
  */

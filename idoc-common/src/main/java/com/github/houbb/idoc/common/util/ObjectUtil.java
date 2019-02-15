@@ -1,4 +1,9 @@
-package com.github.houbb.idoc.core.util;
+/*
+ * Copyright (c)  2019. houbinbin Inc.
+ * idoc All rights reserved.
+ */
+
+package com.github.houbb.idoc.common.util;
 
 /**
  * @author binbin.hou

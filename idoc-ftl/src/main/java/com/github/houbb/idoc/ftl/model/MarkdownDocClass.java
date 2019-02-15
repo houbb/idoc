@@ -11,14 +11,14 @@ public class MarkdownDocClass extends MarkdownDocBase {
     /**
      * 方法列表
      */
-    private List<MarkdownDocMethod> methodList;
+    private List<MarkdownDocMethod> methods;
 
-    public List<MarkdownDocMethod> getMethodList() {
-        return methodList;
+    public List<MarkdownDocMethod> getMethods() {
+        return methods;
     }
 
-    public void setMethodList(List<MarkdownDocMethod> methodList) {
-        this.methodList = methodList;
+    public void setMethods(List<MarkdownDocMethod> methods) {
+        this.methods = methods;
     }
 
 }

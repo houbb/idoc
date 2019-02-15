@@ -1,9 +1,9 @@
 /*
- * Copyright (c)  2018. houbinbin Inc.
- * gen-maven-plugin All rights reserved.
+ * Copyright (c)  2019. houbinbin Inc.
+ * idoc All rights reserved.
  */
 
-package com.github.houbb.idoc.core.util;
+package com.github.houbb.idoc.common.util;
 
 /**
  * 系统工具类

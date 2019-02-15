@@ -13,13 +13,13 @@ public class MarkdownDocField extends MarkdownDocBase {
      * 如果是一个特殊的集合类：则需要这个信息列表。
      * 如果是普通常量，则这个列表为空。
      */
-    private List<MarkdownDocField> fieldEntryList;
+    private List<MarkdownDocField> entries;
 
-    public List<MarkdownDocField> getFieldEntryList() {
-        return fieldEntryList;
+    public List<MarkdownDocField> getEntries() {
+        return entries;
     }
 
-    public void setFieldEntryList(List<MarkdownDocField> fieldEntryList) {
-        this.fieldEntryList = fieldEntryList;
+    public void setEntries(List<MarkdownDocField> entries) {
+        this.entries = entries;
     }
 }

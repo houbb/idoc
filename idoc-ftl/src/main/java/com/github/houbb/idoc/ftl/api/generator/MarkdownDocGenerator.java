@@ -2,17 +2,19 @@ package com.github.houbb.idoc.ftl.api.generator;
 
 import com.github.houbb.idoc.api.config.IDocConfig;
 import com.github.houbb.idoc.api.core.genenrator.AbstractDocGenerator;
-import com.github.houbb.idoc.api.exception.IDocRuntimeException;
 import com.github.houbb.idoc.api.model.metadata.DocClass;
+import com.github.houbb.idoc.common.exception.IDocRuntimeException;
+import com.github.houbb.idoc.common.util.SystemUtil;
 import com.github.houbb.idoc.ftl.constant.MarkdownConstant;
 import com.github.houbb.idoc.ftl.util.FreemarkerUtil;
-import com.github.houbb.idoc.ftl.util.SystemUtil;
 import com.github.houbb.log.integration.core.Log;
 import com.github.houbb.log.integration.core.LogFactory;
 import com.github.houbb.paradise.common.constant.MavenConstant;
 import com.github.houbb.paradise.common.util.DateUtil;
+
 import freemarker.template.Configuration;
 import freemarker.template.Template;
+
 import org.apache.maven.project.MavenProject;
 
 import java.io.File;

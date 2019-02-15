@@ -11,26 +11,26 @@ public class MarkdownDocMethod extends MarkdownDocBase {
     /**
      * 方法入参
      */
-    private List<MarkdownDocField> paramFieldList;
+    private List<MarkdownDocField> params;
 
     /**
      * 方法出参
      */
-    private List<MarkdownDocField> returnFieldList;
+    private List<MarkdownDocField> returns;
 
-    public List<MarkdownDocField> getParamFieldList() {
-        return paramFieldList;
+    public List<MarkdownDocField> getParams() {
+        return params;
     }
 
-    public void setParamFieldList(List<MarkdownDocField> paramFieldList) {
-        this.paramFieldList = paramFieldList;
+    public void setParams(List<MarkdownDocField> params) {
+        this.params = params;
     }
 
-    public List<MarkdownDocField> getReturnFieldList() {
-        return returnFieldList;
+    public List<MarkdownDocField> getReturns() {
+        return returns;
     }
 
-    public void setReturnFieldList(List<MarkdownDocField> returnFieldList) {
-        this.returnFieldList = returnFieldList;
+    public void setReturns(List<MarkdownDocField> returns) {
+        this.returns = returns;
     }
 }
