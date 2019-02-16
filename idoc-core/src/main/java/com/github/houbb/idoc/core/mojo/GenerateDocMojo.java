@@ -1,5 +1,6 @@
 package com.github.houbb.idoc.core.mojo;
 
+import com.github.houbb.idoc.common.config.IDocConfig;
 import com.github.houbb.idoc.core.core.impl.AbstractExecuteService;
 import com.github.houbb.idoc.core.core.impl.GenerateDocService;
 import com.github.houbb.log.integration.core.Log;
@@ -26,12 +27,32 @@ public class GenerateDocMojo extends AbstractMojo {
 
     //region 配置参数的定义
     /**
+     * 存在是是否覆盖
+     */
+    @Parameter ( property = "isOverwriteWhenExists", defaultValue = "false")
+    private boolean isOverwriteWhenExists;
+
+    /**
+     * 是否所有的信息生成在一个文件
+     */
+    @Parameter ( property = "isAllInOne", defaultValue = "true")
+    private boolean isAllInOne;
+
+    /**
      * 文档生成接口指定
      * 1. 指定实现类的全称
      * 2. 用户不指定，则使用系统默认的方式，用户指定则使用用户指定的方式。
      */
     @Parameter(property = "generates", required = false)
     private String[] generates;
+
+    /**
+     * 最后生成文档的包含过滤器
+     * 1. 不指定默认所有的类都生成到文档
+     * 2. 指定之后，只有符合过滤器条件的类才会被生成到文档中。
+     */
+    @Parameter(property = "generateFilters", required = false)
+    private String[] generateFilters;
 
     /**
      * Comma separated includes Java files, i.e. <code>&#42;&#42;/&#42;Test.java</code>.
@@ -79,7 +100,8 @@ public class GenerateDocMojo extends AbstractMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
         log.info("------------------------------------ Start generate doc");
 
-        AbstractExecuteService executeService = new GenerateDocService(project, encoding, generates);
+        IDocConfig iDocConfig = buildDocConfig();
+        AbstractExecuteService executeService = new GenerateDocService(project, iDocConfig);
         try {
             executeService.setExcludes(excludes).setIncludes(includes);
             executeService.execute();
@@ -88,6 +110,20 @@ public class GenerateDocMojo extends AbstractMojo {
         }
 
         log.info("------------------------------------ Finish generate doc");
+    }
+
+    /**
+     * 构建配置信息
+     * @return 配置
+     */
+    private IDocConfig buildDocConfig() {
+        IDocConfig docConfig = new IDocConfig();
+        docConfig.setEncoding(encoding);
+        docConfig.setAllInOne(isAllInOne);
+        docConfig.setOverwriteWhenExists(isOverwriteWhenExists);
+        docConfig.setGenerates(generates);
+        docConfig.setGenerateFilters(generateFilters);
+        return docConfig;
     }
 
 

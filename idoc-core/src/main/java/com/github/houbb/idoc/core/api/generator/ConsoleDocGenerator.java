@@ -1,6 +1,6 @@
 package com.github.houbb.idoc.core.api.generator;
 
-import com.github.houbb.idoc.api.core.genenrator.AbstractDocGenerator;
+import com.github.houbb.idoc.api.core.genenrator.IDocGenerator;
 import com.github.houbb.idoc.api.model.metadata.DocClass;
 import com.github.houbb.idoc.common.util.CollectionUtil;
 import com.github.houbb.idoc.core.core.impl.GenerateDocService;
@@ -14,7 +14,7 @@ import java.util.Collection;
  * @author binbin.hou
  * @since 0.0.1
  */
-public class ConsoleDocGenerator extends AbstractDocGenerator {
+public class ConsoleDocGenerator implements IDocGenerator {
 
     /**
      * 日志

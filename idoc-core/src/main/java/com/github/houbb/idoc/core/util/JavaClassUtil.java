@@ -7,6 +7,7 @@ import com.github.houbb.log.integration.core.LogFactory;
 import com.thoughtworks.qdox.JavaDocBuilder;
 import com.thoughtworks.qdox.model.JavaClass;
 import com.thoughtworks.qdox.model.JavaField;
+import com.thoughtworks.qdox.model.Type;
 import com.thoughtworks.qdox.parser.ParseException;
 import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -284,6 +285,17 @@ public final class JavaClassUtil {
             supperClass = supperClass.getSuperJavaClass();
         }
         return javaFieldList;
+    }
+
+    /**
+     * 是否为 jdk 默认的对象类型
+     *
+     * @param type 类型
+     * @return 是否
+     */
+    public static boolean isPrimitiveOrJdk(final Type type) {
+        return type.isPrimitive()
+                || type.getFullyQualifiedName().startsWith("java.");
     }
 
 }

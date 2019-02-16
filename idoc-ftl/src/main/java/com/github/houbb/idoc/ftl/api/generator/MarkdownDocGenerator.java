@@ -1,8 +1,8 @@
 package com.github.houbb.idoc.ftl.api.generator;
 
-import com.github.houbb.idoc.api.config.IDocConfig;
-import com.github.houbb.idoc.api.core.genenrator.AbstractDocGenerator;
+import com.github.houbb.idoc.api.core.genenrator.IDocGenerator;
 import com.github.houbb.idoc.api.model.metadata.DocClass;
+import com.github.houbb.idoc.common.config.IDocConfig;
 import com.github.houbb.idoc.common.exception.IDocRuntimeException;
 import com.github.houbb.idoc.common.handler.impl.simplify.SimplifyClassHandler;
 import com.github.houbb.idoc.common.model.SimplifyDocClass;
@@ -14,10 +14,8 @@ import com.github.houbb.log.integration.core.Log;
 import com.github.houbb.log.integration.core.LogFactory;
 import com.github.houbb.paradise.common.constant.MavenConstant;
 import com.github.houbb.paradise.common.util.DateUtil;
-
 import freemarker.template.Configuration;
 import freemarker.template.Template;
-
 import org.apache.maven.project.MavenProject;
 
 import java.io.File;
@@ -35,7 +33,7 @@ import java.util.Map;
  * @author binbin.hou
  * @since 0.0.1
  */
-public class MarkdownDocGenerator extends AbstractDocGenerator {
+public class MarkdownDocGenerator implements IDocGenerator {
 
     /**
      * 日志
@@ -73,11 +71,9 @@ public class MarkdownDocGenerator extends AbstractDocGenerator {
     public MarkdownDocGenerator() {
     }
 
-    public MarkdownDocGenerator(final MavenProject project, final String encoding) {
+    public MarkdownDocGenerator(final MavenProject project, final IDocConfig docConfig) {
         this.project = project;
-        this.encoding = encoding;
-
-        IDocConfig docConfig = super.getDocConfig();
+        this.encoding = docConfig.getEncoding();
         this.isOverwriteWhenExists = docConfig.isOverwriteWhenExists();
         this.isAllInOne = docConfig.isAllInOne();
 
@@ -98,10 +94,13 @@ public class MarkdownDocGenerator extends AbstractDocGenerator {
         //1. 生成目标文件夹
         Path path = Paths.get(targetPath);
         File file = path.toFile();
-        boolean makeDirs = file.mkdirs();
-        if(!makeDirs) {
-            log.error("目标文件夹创建失败，执行中断：{}", targetPath);
-            throw new IDocRuntimeException("目标文件夹创建失败，执行中断！");
+        if(!file.exists()) {
+            log.info("开始创建目标文件夹: {}", targetPath);
+            boolean makeDirs = file.mkdirs();
+            if(!makeDirs) {
+                log.error("目标文件夹创建失败，执行中断：{}", targetPath);
+                throw new IDocRuntimeException("目标文件夹创建失败，执行中断！");
+            }
         }
 
         //2.0 生成对应的文件

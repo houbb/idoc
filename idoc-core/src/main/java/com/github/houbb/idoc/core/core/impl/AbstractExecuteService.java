@@ -3,9 +3,9 @@ package com.github.houbb.idoc.core.core.impl;
 
 import com.github.houbb.idoc.api.model.metadata.DocClass;
 import com.github.houbb.idoc.common.exception.IDocRuntimeException;
+import com.github.houbb.idoc.common.handler.IHandler;
 import com.github.houbb.idoc.common.util.ConsoleProgressBar;
 import com.github.houbb.idoc.core.core.ExecuteService;
-import com.github.houbb.idoc.core.handler.JavaClassHandler;
 import com.github.houbb.idoc.core.util.JavaClassUtil;
 import com.github.houbb.log.integration.core.Log;
 import com.github.houbb.log.integration.core.LogFactory;
@@ -24,7 +24,7 @@ import java.util.List;
  *
  * @author bbhou
  * @version 0.0.1
- * @since 1.0.0, 2017/11/12
+ * @since 0.0.1, 2017/11/12
  */
 public abstract class AbstractExecuteService implements ExecuteService {
 
@@ -53,6 +53,9 @@ public abstract class AbstractExecuteService implements ExecuteService {
      */
     protected String excludes;
 
+
+    public AbstractExecuteService() {
+    }
 
     /**
      *  抽象执行服务
@@ -85,7 +88,7 @@ public abstract class AbstractExecuteService implements ExecuteService {
 
         //3. 构建对应的对象信息
         List<DocClass> docClassList = new ArrayList<>();
-        JavaClassHandler javaClassHandler = configJavaClassHandler();
+        IHandler<JavaClass, DocClass> javaClassHandler = configJavaClassHandler();
 
         int totalNum = javaClasses.length;
         log.info("共计 【" + totalNum + "】 个文件待处理，请耐心等待。进度如下：");
@@ -107,7 +110,7 @@ public abstract class AbstractExecuteService implements ExecuteService {
      *
      * @return Exception if any
      */
-    protected abstract JavaClassHandler configJavaClassHandler();
+    protected abstract IHandler<JavaClass, DocClass> configJavaClassHandler();
 
     /**
      * 执行之前

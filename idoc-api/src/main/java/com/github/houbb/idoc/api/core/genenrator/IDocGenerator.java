@@ -1,6 +1,5 @@
 package com.github.houbb.idoc.api.core.genenrator;
 
-import com.github.houbb.idoc.api.config.IDocConfig;
 import com.github.houbb.idoc.api.model.metadata.DocClass;
 
 import java.util.Collection;
@@ -17,6 +16,8 @@ import java.util.Collection;
  *
  * 1. 用户可以使用系统内置的，也可以使用自定义的实现。
  * 2. 一定要提供默认的无参构造器
+ *
+ * 当用户自定义生成器的时候，所有的信息自己都是知道的。没必要在配置一遍。
  * @author binbin.hou
  * @since 0.0.1
  */
@@ -27,11 +28,5 @@ public interface IDocGenerator {
      * @param docClasses 文档类原始信息
      */
     void generate(final Collection<DocClass> docClasses);
-
-    /**
-     * 获取文档配置信息
-     * @return 配置信息
-     */
-    IDocConfig getDocConfig();
 
 }

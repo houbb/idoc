@@ -13,6 +13,12 @@
     <description>The test module of i-doc project.</description>
 
     <dependencies>
+        <!--============================== SELF ==============================-->
+        <dependency>
+            <groupId>com.github.houbb</groupId>
+            <artifactId>idoc-api</artifactId>
+        </dependency>
+
         <!--============================== OTHER ==============================-->
         <dependency>
             <groupId>junit</groupId>
