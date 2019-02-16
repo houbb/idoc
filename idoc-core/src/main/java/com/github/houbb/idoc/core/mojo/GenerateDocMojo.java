@@ -27,6 +27,39 @@ public class GenerateDocMojo extends AbstractMojo {
 
     //region 配置参数的定义
     /**
+     * The Maven Project Object.
+     */
+    @Parameter( defaultValue = "${project}", readonly = true, required = true )
+    private MavenProject project;
+
+    /**
+     * The current user system settings for use in Maven.
+     */
+    @Parameter( defaultValue = "${settings}", readonly = true, required = true )
+    private Settings settings;
+
+    /**
+     * The file encoding to use when reading the source files. If the property
+     * <code>project.build.sourceEncoding</code> is not set, the platform default encoding is used.
+     */
+    @Parameter ( property = "encoding", defaultValue = "UTF-8" )
+    private String encoding;
+
+    /**
+     * Comma separated includes Java files, i.e. <code>&#42;&#42;/&#42;Test.java</code>.
+     * <p/>
+     * <strong>Note:</strong> default value is {@code **\/*.java}.
+     */
+    @Parameter ( property = "includes", defaultValue = "**\\/*.java" )
+    private String includes;
+
+    /**
+     * Comma separated excludes Java files, i.e. <code>&#42;&#42;/&#42;Test.java</code>.
+     */
+    @Parameter ( property = "excludes")
+    private String excludes;
+
+    /**
      * 存在是是否覆盖
      */
     @Parameter ( property = "isOverwriteWhenExists", defaultValue = "false")
@@ -53,42 +86,7 @@ public class GenerateDocMojo extends AbstractMojo {
      */
     @Parameter(property = "generateFilters", required = false)
     private String[] generateFilters;
-
-    /**
-     * Comma separated includes Java files, i.e. <code>&#42;&#42;/&#42;Test.java</code>.
-     * <p/>
-     * <strong>Note:</strong> default value is {@code **\/*.java}.
-     */
-    @Parameter ( property = "includes", defaultValue = "**\\/*.java" )
-    private String includes;
-
-    /**
-     * Comma separated excludes Java files, i.e. <code>&#42;&#42;/&#42;Test.java</code>.
-     */
-    @Parameter ( property = "excludes")
-    private String excludes;
-
-    /**
-     * The Maven Project Object.
-     */
-    @Parameter( defaultValue = "${project}", readonly = true, required = true )
-    private MavenProject project;
-
-    /**
-     * The current user system settings for use in Maven.
-     */
-    @Parameter( defaultValue = "${settings}", readonly = true, required = true )
-    private Settings settings;
-
-    /**
-     * The file encoding to use when reading the source files. If the property
-     * <code>project.build.sourceEncoding</code> is not set, the platform default encoding is used.
-     */
-    @Parameter ( property = "encoding", defaultValue = "UTF-8" )
-    private String encoding;
     //endregion
-
-
 
 
     /**
