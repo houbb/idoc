@@ -3,6 +3,7 @@ package com.github.houbb.idoc.common.util;
 import com.github.houbb.paradise.common.util.StringUtil;
 
 /**
+ * doc 类工具类
  * @author binbin.hou
  * @since 0.0.1
  */
@@ -16,7 +17,6 @@ public class DocClassUtil {
      * @param remark 备注信息
      * @return 结果
      */
-    @Deprecated
     public static String getRemark(final String comment, final String remark) {
         if(StringUtil.isNotEmpty(remark)) {
             return remark;

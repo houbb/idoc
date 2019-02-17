@@ -14,6 +14,7 @@ import com.github.houbb.log.integration.core.Log;
 import com.github.houbb.log.integration.core.LogFactory;
 import com.github.houbb.paradise.common.constant.MavenConstant;
 import com.github.houbb.paradise.common.util.DateUtil;
+import com.github.houbb.paradise.common.util.PathUtil;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.apache.maven.project.MavenProject;
@@ -85,50 +86,65 @@ public class MarkdownDocGenerator implements IDocGenerator {
      * 生成的时候有两种模式：
      * 1. all-in-one 所有的信息在一起
      * 2. 每个类一个文件，然后生成一个统一的 index.md
+     *
+     * TODO: 多线程处理
      * @param docClasses 文档类原始信息
      */
     @Override
     public void generate(Collection<DocClass> docClasses) {
-        String targetPath = buildTargetDirPath();
-
-        //1. 生成目标文件夹
-        Path path = Paths.get(targetPath);
-        File file = path.toFile();
-        if(!file.exists()) {
-            log.info("开始创建目标文件夹: {}", targetPath);
-            boolean makeDirs = file.mkdirs();
-            if(!makeDirs) {
-                log.error("目标文件夹创建失败，执行中断：{}", targetPath);
-                throw new IDocRuntimeException("目标文件夹创建失败，执行中断！");
-            }
-        }
+        String genBaseDir = project.getBasedir().getPath()
+                + File.separator
+                + MarkdownConstant.Generate.IDOC_MARKDOWN_BASE_PACAKGE
+                +File.separator;
 
         //2.0 生成对应的文件
         List<SimplifyDocClass> simplifyDocClasses = CollectionUtil.buildList(docClasses, new SimplifyClassHandler());
+        if(CollectionUtil.isEmpty(simplifyDocClasses)) {
+            log.info("待生成列表信息为空，生成文档结束。");
+            return;
+        }
 
-        Map<String, Object> root = new HashMap<>();
-        root.put("author", SystemUtil.getCurrentUserName());
-        root.put("version", project.getVersion());
-        root.put("today", DateUtil.getSimpleDateStr());
-        root.put("classes", simplifyDocClasses);
-
-        // 这里等后期才变成可以自由配置的
-        String targetFile = targetPath + MarkdownConstant.Generate.IDOC_MARKDOWN_ALL_IN_ONE;
-        log.info("Markdown 生成文件路径: {}", targetFile);
-        FreemarkerUtil.createFile(template, targetFile, root, isOverwriteWhenExists);
+        // 基础信息
+        if(isAllInOne) {
+            String targetFile = genBaseDir + project.getName()+"-全部文档.md";
+            log.info("Markdown 生成文档文件 all in one 路径: {}", targetFile);
+            StringBuilder stringBuffer = new StringBuilder();
+            for(SimplifyDocClass javaClass : simplifyDocClasses) {
+                final  String fileContent = getDocClassContent(javaClass);
+                stringBuffer.append(fileContent).append("\n\n");
+            }
+            FreemarkerUtil.createFile(targetFile, isOverwriteWhenExists, stringBuffer.toString());
+        } else {
+            for(SimplifyDocClass javaClass : simplifyDocClasses) {
+                // 在指定的文件夹下，指定的每一个类对应一个文件。
+                // 这里的处理可以抽象出来，所有的实现只是具体的
+                final String packageName = javaClass.getPackageName();
+                final String className = javaClass.getName();
+                String segmentTargetPathStr = genBaseDir + PathUtil.packageToPath(packageName) + File.separator;
+                String targetFile = segmentTargetPathStr + className + ".md";
+                final  String fileContent = getDocClassContent(javaClass);
+                log.info("Markdown 生成文档文件单个类路径: {}", targetFile);
+                FreemarkerUtil.createFile(targetFile, isOverwriteWhenExists, fileContent);
+            }
+        }
     }
 
     /**
-     * 构建目标文件夹
-     * @return 目录
+     * 获取文档内容
+     * @param simplifyDocClass 原始类信息
+     * @return 结果
      */
-    private String buildTargetDirPath() {
-        return project.getBasedir().getPath() + File.separator + MarkdownConstant.Generate.IDOC_MARKDOWN_BASE_PACAKGE
-                +File.separator;
+    private String getDocClassContent(final SimplifyDocClass simplifyDocClass) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("author", SystemUtil.getCurrentUserName());
+        map.put("today", DateUtil.getSimpleDateStr());
+        map.put("class", simplifyDocClass);
+        return FreemarkerUtil.getTemplateContent(template, map);
     }
 
     /**
      * 初始化FTL配置
+     * 用户自定义：resource/idoc-markdown-class-segment.ftl
      */
     private void initFtlConfig() {
         try {
@@ -137,7 +153,7 @@ public class MarkdownDocGenerator implements IDocGenerator {
             //1. 判断根目录下是否有此文件 如果有则按照这个为准
             final String userDefineFtl = project.getBasedir().getPath() + File.separator
                     + MavenConstant.SRC_MAIN_RESOURCES_PATH +
-                    MarkdownConstant.Template.IDOC_MARKDOWN_ALL_IN_ONE_FTL;
+                    MarkdownConstant.Template.IDOC_MARKDOWN_CLASS_SEGMENT_FTL;
             Path path = Paths.get(userDefineFtl);
             if (Files.exists(path)) {
                 // 用户根目录自定义
@@ -148,7 +164,7 @@ public class MarkdownDocGenerator implements IDocGenerator {
                         MarkdownConstant.Template.IDOC_MARKDOWN_BASE_PACKAGE);
             }
 
-            template = configuration.getTemplate(MarkdownConstant.Template.IDOC_MARKDOWN_ALL_IN_ONE_FTL);
+            template = configuration.getTemplate(MarkdownConstant.Template.IDOC_MARKDOWN_CLASS_SEGMENT_FTL);
         } catch (IOException e) {
             log.error("init config meet ex:{}", e);
             throw new IDocRuntimeException(e);

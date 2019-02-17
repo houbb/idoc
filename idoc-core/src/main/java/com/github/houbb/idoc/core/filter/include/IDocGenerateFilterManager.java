@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * 文档生成包含过滤器管理类
  * @author binbin.hou
  * @since 0.0.1
  */

@@ -118,4 +118,61 @@ public final class FreemarkerUtil {
         out.flush();
     }
 
+    /**
+     * 创建文件
+     * [写入文件的几种方式](https://blog.csdn.net/netsnake_/article/details/80395241)
+     * @param targetFilePath 目标文件路径
+     * @param isOverwriteWhenExists 是否覆盖文件内容
+     * @param fileContent 文件内容
+     * @return 是否创建成功
+     */
+    public static boolean createFile(final String targetFilePath,
+                                     final boolean isOverwriteWhenExists,
+                                     final String fileContent) {
+        boolean result = true;
+        File file = new File(targetFilePath);
+
+        //create parent dir first.
+        boolean makeDirs = file.getParentFile().mkdirs();
+        log.debug("createFile makeDirs:{}", makeDirs);
+
+        try(FileWriter writer = new FileWriter(file)) {
+            if(file.exists()
+                && !isOverwriteWhenExists) {
+                log.debug("文件：{} 已经存在，且不用覆盖。", targetFilePath);
+                return true;
+            }
+            if (!file.exists()) {
+                result = file.createNewFile();
+            }
+
+            //清空原始文件内容
+            writer.write("");
+            writer.write(fileContent);
+        } catch (IOException e) {
+            log.error("create file meet ex{}", e, e);
+            throw new RuntimeException(e);
+        }
+
+        return result;
+    }
+
+
+    /**
+     * 获取模板转换后的字符串内容
+     * @param template 模板
+     * @param map 集合
+     * @return 结果
+     */
+    public static String getTemplateContent(final Template template,
+                                      final Map<String, Object> map) {
+        try {
+            Writer writer = new StringWriter();
+            template.process(map, writer);
+            return writer.toString();
+        } catch (TemplateException | IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

@@ -9,7 +9,6 @@ import com.github.houbb.idoc.api.model.metadata.DocClass;
  * 1. 比如只生成有 methods 的类
  * 2. 只生成指定版本的类
  *
- * 这样结果比较简洁
  * @author binbin.hou
  * @since 0.0.1
  */

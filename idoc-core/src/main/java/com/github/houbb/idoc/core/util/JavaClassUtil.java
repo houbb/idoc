@@ -26,7 +26,7 @@ import java.util.*;
  * Created by bbhou on 2017/11/2.
  * for: com.thoughtworks.qdox
  * @author bbhou
- * @version 1.0.0
+ * @since 0.0.1
  */
 public final class JavaClassUtil {
 

@@ -14,6 +14,7 @@ import org.apache.maven.project.MavenProject;
 import org.apache.maven.settings.Settings;
 
 /**
+ * mvn 插件核心类
  * @author binbin.hou
  * @since 0.0.1
  */
@@ -62,7 +63,7 @@ public class GenerateDocMojo extends AbstractMojo {
     /**
      * 存在是是否覆盖
      */
-    @Parameter ( property = "isOverwriteWhenExists", defaultValue = "false")
+    @Parameter ( property = "isOverwriteWhenExists", defaultValue = "true")
     private boolean isOverwriteWhenExists;
 
     /**

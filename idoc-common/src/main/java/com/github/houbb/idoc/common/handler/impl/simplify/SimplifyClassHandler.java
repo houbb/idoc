@@ -17,17 +17,18 @@ import java.util.List;
 public class SimplifyClassHandler implements IHandler<DocClass, SimplifyDocClass> {
     @Override
     public SimplifyDocClass handle(DocClass docClass) {
-        SimplifyDocClass commonDocClass = new SimplifyDocClass();
-        commonDocClass.setName(docClass.getName());
-        commonDocClass.setComment(docClass.getComment());
-        commonDocClass.setRemark(docClass.getRemark());
+        SimplifyDocClass simplifyDocClass = new SimplifyDocClass();
+        simplifyDocClass.setName(docClass.getName());
+        simplifyDocClass.setPackageName(docClass.getPackageName());
+        simplifyDocClass.setComment(docClass.getComment());
+        simplifyDocClass.setRemark(docClass.getRemark());
 
         // 方法信息
         List<DocMethod> docMethodList = docClass.getDocMethodList();
         List<SimplifyDocMethod> commonDocMethodList = CollectionUtil.buildList(docMethodList, new SimplifyMethodHandler());
-        commonDocClass.setMethods(commonDocMethodList);
+        simplifyDocClass.setMethods(commonDocMethodList);
 
-        return commonDocClass;
+        return simplifyDocClass;
     }
 
 }

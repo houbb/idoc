@@ -19,9 +19,9 @@ public final class MarkdownConstant {
         public static final String IDOC_MARKDOWN_BASE_PACKAGE = "/idoc/markdown";
 
         /**
-         * idoc markdown 所有的信息生成在一起
+         * idoc markdown 单个 class 文件信息模板
          */
-        public static final String IDOC_MARKDOWN_ALL_IN_ONE_FTL = "idoc-markdown-all.ftl";
+        public static final String IDOC_MARKDOWN_CLASS_SEGMENT_FTL = "idoc-markdown-class-segment.ftl";
     }
 
     public static class Generate {
@@ -34,6 +34,7 @@ public final class MarkdownConstant {
         /**
          * idoc markdown 所有的信息生成在一起
          */
+        @Deprecated
         public static final String IDOC_MARKDOWN_ALL_IN_ONE = "idoc-markdown-all.md";
     }
 

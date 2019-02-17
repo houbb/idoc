@@ -9,9 +9,22 @@ import java.util.List;
 public class SimplifyDocClass extends SimplifyDocBase {
 
     /**
+     * 包名称
+     */
+    private String packageName;
+
+    /**
      * 方法列表
      */
     private List<SimplifyDocMethod> methods;
+
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
+    }
 
     public List<SimplifyDocMethod> getMethods() {
         return methods;

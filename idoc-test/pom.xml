@@ -34,12 +34,13 @@
                 <artifactId>idoc-core</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
                 <configuration>
+                    <isAllInOne>true</isAllInOne>
                     <generates>
                         <generate>com.github.houbb.idoc.ftl.api.generator.MarkdownDocGenerator</generate>
                     </generates>
-                    <generateFilters>
-                        <generateFilter>com.github.houbb.idoc.test.filter.MyGenerateFilter</generateFilter>
-                    </generateFilters>
+                    <!--<generateFilters>-->
+                        <!--<generateFilter>com.github.houbb.idoc.test.filter.MyGenerateFilter</generateFilter>-->
+                    <!--</generateFilters>-->
                 </configuration>
                 <dependencies>
                     <dependency>

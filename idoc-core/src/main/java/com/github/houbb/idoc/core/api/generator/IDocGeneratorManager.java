@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
+ * 文档生成器管理类
  * @author binbin.hou
  * @since 0.0.1
  */

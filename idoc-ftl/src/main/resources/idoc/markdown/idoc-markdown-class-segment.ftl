@@ -1,11 +1,5 @@
-# I-DOC 文档
-
-当前文档由 [i-doc](https://github.com/houbb/idoc) 自动生成于 ${today}。
-
-<#if classes??>
-<#list classes as class>
+<#if class??>
 # ${class.name}-${class.comment!""}
-
 ${class.remark!""}
 
 <#if class.methods??>
@@ -40,8 +34,6 @@ ${method.remark!""}
 </#list>
 
 </#if>
-
-</#list>
 </#if>
 
 
