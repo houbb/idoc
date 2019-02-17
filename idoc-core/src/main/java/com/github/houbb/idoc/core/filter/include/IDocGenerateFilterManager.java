@@ -32,7 +32,7 @@ public class IDocGenerateFilterManager implements IDocGenerateFilter {
     /**
      * 过滤器列表
      */
-    private List<IDocGenerateFilter> docGenerateFilterList;
+    private List<IDocGenerateFilter> docGenerateFilterList = new ArrayList<>();
 
     public IDocGenerateFilterManager(final String[] generateFilters) {
         this.generateFilters = generateFilters;
@@ -84,7 +84,7 @@ public class IDocGenerateFilterManager implements IDocGenerateFilter {
      */
     private void initIncludeFilter() {
         if(ArrayUtil.isEmpty(this.generateFilters)) {
-            this.docGenerateFilterList = Collections.emptyList();
+            return;
         }
 
         try {
