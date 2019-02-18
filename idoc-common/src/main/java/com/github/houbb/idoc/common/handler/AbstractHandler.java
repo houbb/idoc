@@ -1,8 +1,6 @@
 package com.github.houbb.idoc.common.handler;
 
 import com.github.houbb.idoc.common.util.ObjectUtil;
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
 
 /**
  * 抽象处理器
@@ -10,8 +8,6 @@ import com.github.houbb.log.integration.core.LogFactory;
  * @since 0.0.1
  */
 public abstract class AbstractHandler<T, R> implements IHandler<T, R> {
-
-    protected Log log = LogFactory.getLog(AbstractHandler.class);
 
     @Override
     public R handle(T t) {

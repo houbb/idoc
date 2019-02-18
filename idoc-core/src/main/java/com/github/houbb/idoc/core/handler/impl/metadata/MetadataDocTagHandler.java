@@ -1,6 +1,7 @@
 package com.github.houbb.idoc.core.handler.impl.metadata;
 
 import com.github.houbb.idoc.api.model.metadata.DocTag;
+import com.github.houbb.idoc.common.handler.AbstractHandler;
 import com.github.houbb.idoc.common.handler.IHandler;
 import com.thoughtworks.qdox.model.DocletTag;
 
@@ -9,9 +10,9 @@ import com.thoughtworks.qdox.model.DocletTag;
  * @author binbin.hou
  * @since 0.0.1
  */
-public class MetadataDocTagHandler implements IHandler<DocletTag, DocTag> {
+public class MetadataDocTagHandler extends AbstractHandler<DocletTag, DocTag> {
     @Override
-    public DocTag handle(DocletTag docletTag) {
+    protected DocTag doHandle(DocletTag docletTag) {
         DocTag docTag = new DocTag();
         docTag.setName(docletTag.getName());
         docTag.setLineNum(docletTag.getLineNumber());

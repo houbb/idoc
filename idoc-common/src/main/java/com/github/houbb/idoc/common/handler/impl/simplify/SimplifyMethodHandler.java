@@ -73,8 +73,8 @@ public class SimplifyMethodHandler implements IHandler<DocMethod, SimplifyDocMet
             return null;
         }
 
-        // 保证顺序性
-        Map<String, List<SimplifyDocField>> map = new LinkedHashMap<>();
+        final Map<String, List<SimplifyDocField>> map = new LinkedHashMap<>();
+
         for(SimplifyDocField docField : fields) {
             final String name = docField.getName();
             List<SimplifyDocField> entries = docField.getEntries();
@@ -82,6 +82,15 @@ public class SimplifyMethodHandler implements IHandler<DocMethod, SimplifyDocMet
                 continue;
             }
             map.put(name, entries);
+
+            // 循环处理2层-可以优化
+            for(SimplifyDocField entryDocField : entries) {
+                final List<SimplifyDocField> entryFields = entryDocField.getEntries();
+                if(CollectionUtil.isNotEmpty(entryFields)) {
+                    final String entryName = entryDocField.getName();
+                    map.put(entryName, entryFields);
+                }
+            }
         }
         return map;
     }

@@ -1,12 +1,9 @@
 package com.github.houbb.idoc.core.handler.impl.metadata;
 
-import com.github.houbb.idoc.api.model.metadata.DocAnnotation;
-import com.github.houbb.idoc.api.model.metadata.DocField;
 import com.github.houbb.idoc.api.model.metadata.DocParameter;
 import com.github.houbb.idoc.common.handler.AbstractHandler;
 import com.github.houbb.idoc.common.handler.IHandler;
 import com.github.houbb.idoc.common.util.ArrayUtil;
-import com.github.houbb.idoc.common.util.CollectionUtil;
 import com.github.houbb.idoc.core.constant.JavaTagConstant;
 import com.github.houbb.idoc.core.util.JavaClassUtil;
 import com.github.houbb.idoc.core.util.MetadataDocUtil;

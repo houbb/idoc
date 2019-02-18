@@ -278,9 +278,11 @@ public final class JavaClassUtil {
         // 当前类
         CollectionUtil.addArray(javaFieldList, javaClass.getFields());
         //处理父类信息-这里的 parentClass 是空的
+        System.out.println("getAllJavaFieldList.javaClass" + javaClass);
         JavaClass supperClass = javaClass.getSuperJavaClass();
         while (supperClass != null
             && !"java.lang.Object".equals(supperClass.getFullyQualifiedName())) {
+            System.out.println("getAllJavaFieldList.supperClass" + supperClass.getFullyQualifiedName());
             CollectionUtil.addArray(javaFieldList, supperClass.getFields());
             supperClass = supperClass.getSuperJavaClass();
         }
@@ -296,6 +298,22 @@ public final class JavaClassUtil {
     public static boolean isPrimitiveOrJdk(final Type type) {
         return type.isPrimitive()
                 || type.getFullyQualifiedName().startsWith("java.");
+    }
+
+    /**
+     * 是否为死循环
+     * @param javaField 当前字段
+     * @param javaFieldList 对应字段列表
+     * @return 结果
+     */
+    public static boolean isDeadCycle(final JavaField javaField,
+                                final List<JavaField> javaFieldList) {
+        for(JavaField javaField1 : javaFieldList) {
+            if(javaField.getType().getFullyQualifiedName().equals(javaField1.getType().getFullyQualifiedName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

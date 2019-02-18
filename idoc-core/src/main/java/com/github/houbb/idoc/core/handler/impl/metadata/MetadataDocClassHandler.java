@@ -20,7 +20,8 @@ public class MetadataDocClassHandler extends AbstractHandler<JavaClass, DocClass
     /**
      * 日志
      */
-    private final Log log = LogFactory.getLog(MetadataDocClassHandler.class);
+    private static final Log log = LogFactory.getLog(MetadataDocClassHandler.class);
+
 
     @Override
     protected DocClass doHandle(JavaClass javaClass) {
