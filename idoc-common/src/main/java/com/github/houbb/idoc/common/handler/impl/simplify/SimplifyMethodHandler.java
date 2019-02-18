@@ -9,8 +9,7 @@ import com.github.houbb.idoc.common.model.SimplifyDocField;
 import com.github.houbb.idoc.common.model.SimplifyDocMethod;
 import com.github.houbb.idoc.common.util.CollectionUtil;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author binbin.hou
@@ -35,6 +34,8 @@ public class SimplifyMethodHandler implements IHandler<DocMethod, SimplifyDocMet
 
         commonDocMethod.setParams(params);
         commonDocMethod.setReturns(returns);
+        commonDocMethod.setParamDetails(buildFieldDetails(params));
+        commonDocMethod.setReturnDetails(buildFieldDetails(returns));
         return commonDocMethod;
     }
 
@@ -60,6 +61,29 @@ public class SimplifyMethodHandler implements IHandler<DocMethod, SimplifyDocMet
         // 当前返回类的所有字段信息
         final List<DocField> docFieldList = returnDocClass.getDocFieldList();
         return CollectionUtil.buildList(docFieldList, new SimplifyDocFieldHandler());
+    }
+
+    /**
+     * 构建出参/入参字段明细
+     * @param fields 参数列表
+     * @return 结果集合
+     */
+    private Map<String, List<SimplifyDocField>> buildFieldDetails(final List<SimplifyDocField> fields) {
+        if(CollectionUtil.isEmpty(fields)) {
+            return null;
+        }
+
+        // 保证顺序性
+        Map<String, List<SimplifyDocField>> map = new LinkedHashMap<>();
+        for(SimplifyDocField docField : fields) {
+            final String name = docField.getName();
+            List<SimplifyDocField> entries = docField.getEntries();
+            if(CollectionUtil.isEmpty(entries)) {
+                continue;
+            }
+            map.put(name, entries);
+        }
+        return map;
     }
 
 }

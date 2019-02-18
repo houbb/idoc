@@ -21,18 +21,19 @@ public class SimplifyParamFieldHandler implements IHandler<DocParameter, Simplif
             return null;
         }
 
-        SimplifyDocField commonDocField = new SimplifyDocField();
-        commonDocField.setName(docParameter.getName());
-        commonDocField.setComment(docParameter.getComment());
-        commonDocField.setRemark(docParameter.getRemark());
+        SimplifyDocField simplifyDocField = new SimplifyDocField();
+        simplifyDocField.setName(docParameter.getName());
+        simplifyDocField.setComment(docParameter.getComment());
+        simplifyDocField.setRemark(docParameter.getRemark());
+        simplifyDocField.setType(docParameter.getType());
 
         // 入参为特殊参数列表
         List<DocField> docFieldList =  docParameter.getDocFieldList();
         if(CollectionUtil.isNotEmpty(docFieldList)) {
-            List<SimplifyDocField> commonDocFieldList = CollectionUtil.buildList(docFieldList,
+            List<SimplifyDocField> simplifyDocFieldList = CollectionUtil.buildList(docFieldList,
                     new SimplifyDocFieldHandler());
-            commonDocField.setEntries(commonDocFieldList);
+            simplifyDocField.setEntries(simplifyDocFieldList);
         }
-        return commonDocField;
+        return simplifyDocField;
     }
 }

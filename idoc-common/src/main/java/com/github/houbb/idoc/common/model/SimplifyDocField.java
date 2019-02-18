@@ -21,19 +21,9 @@ public class SimplifyDocField extends SimplifyDocBase {
     private String required;
 
     /**
-     * 字段信息列表
-     * 如果是一个特殊的集合类：则需要这个信息列表。
-     * 如果是普通常量，则这个列表为空。
+     * 详情列表信息
      */
     private List<SimplifyDocField> entries;
-
-    public List<SimplifyDocField> getEntries() {
-        return entries;
-    }
-
-    public void setEntries(List<SimplifyDocField> entries) {
-        this.entries = entries;
-    }
 
     public String getType() {
         return type;
@@ -49,5 +39,13 @@ public class SimplifyDocField extends SimplifyDocBase {
 
     public void setRequired(String required) {
         this.required = required;
+    }
+
+    public List<SimplifyDocField> getEntries() {
+        return entries;
+    }
+
+    public void setEntries(List<SimplifyDocField> entries) {
+        this.entries = entries;
     }
 }

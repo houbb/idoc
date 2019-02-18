@@ -31,11 +31,6 @@ public final class MarkdownConstant {
          */
         public static final String IDOC_MARKDOWN_BASE_PACAKGE = MavenConstant.SRC_MAIN_RESOURCES_PATH+"idoc-gen";
 
-        /**
-         * idoc markdown 所有的信息生成在一起
-         */
-        @Deprecated
-        public static final String IDOC_MARKDOWN_ALL_IN_ONE = "idoc-markdown-all.md";
     }
 
 }

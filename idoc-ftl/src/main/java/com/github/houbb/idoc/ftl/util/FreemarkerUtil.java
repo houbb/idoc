@@ -12,7 +12,7 @@ import java.util.Map;
  * Freemarker 工具类
  *
  * @author houbinbin
- * @version 1.0
+ * @since 0.0.1
  */
 public final class FreemarkerUtil {
 

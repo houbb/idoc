@@ -20,22 +20,22 @@ public class SimplifyDocFieldHandler implements IHandler<DocField, SimplifyDocFi
             return null;
         }
 
-        SimplifyDocField commonDocField = new SimplifyDocField();
-        commonDocField.setName(docField.getName());
-        commonDocField.setComment(docField.getComment());
-        commonDocField.setType(docField.getType());
-        commonDocField.setRequired(docField.getRequired());
-        commonDocField.setRemark(docField.getRemark());
+        SimplifyDocField simplifyDocField = new SimplifyDocField();
+        simplifyDocField.setName(docField.getName());
+        simplifyDocField.setComment(docField.getComment());
+        simplifyDocField.setType(docField.getType());
+        simplifyDocField.setRequired(docField.getRequired());
+        simplifyDocField.setRemark(docField.getRemark());
 
         // 处理特殊字段信息 比如集合字段
         // TODO: 需要在读取的时候进行特殊处理。
         List<DocField> docFieldList = docField.getDocFieldList();
         if(CollectionUtil.isNotEmpty(docFieldList)) {
-            List<SimplifyDocField> commonDocFieldList = CollectionUtil.buildList(docFieldList,
+            List<SimplifyDocField> simplifyDocFieldList = CollectionUtil.buildList(docFieldList,
                     new SimplifyDocFieldHandler());
-            commonDocField.setEntries(commonDocFieldList);
+            simplifyDocField.setEntries(simplifyDocFieldList);
         }
 
-        return commonDocField;
+        return simplifyDocField;
     }
 }

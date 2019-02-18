@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * 数组工具类
  * @author binbin.hou
  * @since 0.0.1
  */
