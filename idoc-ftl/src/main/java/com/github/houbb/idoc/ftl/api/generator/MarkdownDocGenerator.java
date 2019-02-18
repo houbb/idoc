@@ -1,8 +1,9 @@
 package com.github.houbb.idoc.ftl.api.generator;
 
 import com.github.houbb.idoc.api.core.genenrator.IDocGenerator;
+import com.github.houbb.idoc.api.model.config.DocConfig;
 import com.github.houbb.idoc.api.model.metadata.DocClass;
-import com.github.houbb.idoc.common.config.IDocConfig;
+import com.github.houbb.idoc.api.model.mvn.DocMavenProject;
 import com.github.houbb.idoc.common.exception.IDocRuntimeException;
 import com.github.houbb.idoc.common.handler.impl.simplify.SimplifyClassHandler;
 import com.github.houbb.idoc.common.model.SimplifyDocClass;
@@ -17,7 +18,6 @@ import com.github.houbb.paradise.common.util.DateUtil;
 import com.github.houbb.paradise.common.util.PathUtil;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
-import org.apache.maven.project.MavenProject;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,52 +47,21 @@ public class MarkdownDocGenerator implements IDocGenerator {
     private Template template;
 
     /**
-     * 是否覆盖编写
-     */
-    private boolean isOverwriteWhenExists;
-
-    /**
-     * 所有的内容生成一个文件
-     */
-    private boolean isAllInOne;
-
-    /**
-     * 项目信息
-     */
-    private MavenProject project;
-
-    /**
-     * 编码
-     */
-    private String encoding;
-
-    /**
      * 必须要有空构造器
      */
     public MarkdownDocGenerator() {
     }
 
-    public MarkdownDocGenerator(final MavenProject project, final IDocConfig docConfig) {
-        this.project = project;
-        this.encoding = docConfig.getEncoding();
-        this.isOverwriteWhenExists = docConfig.isOverwriteWhenExists();
-        this.isAllInOne = docConfig.isAllInOne();
 
-        // 初始化FTL配置
-        initFtlConfig();
-    }
-
-    /**
-     * 生成的时候有两种模式：
-     * 1. all-in-one 所有的信息在一起
-     * 2. 每个类一个文件，然后生成一个统一的 index.md
-     *
-     * TODO: 多线程处理
-     * @param docClasses 文档类原始信息
-     */
     @Override
-    public void generate(Collection<DocClass> docClasses) {
-        String genBaseDir = project.getBasedir().getPath()
+    public void generate(DocMavenProject docMavenProject, DocConfig docConfig, Collection<DocClass> docClasses) {
+        // 初始化模板配置
+        this.initFtlConfig(docMavenProject, docConfig);
+
+        final boolean isOverwriteWhenExists = docConfig.isOverwriteWhenExists();
+        final boolean isAllInOne = docConfig.isAllInOne();
+
+        String genBaseDir = docMavenProject.getBaseDir()
                 + File.separator
                 + MarkdownConstant.Generate.IDOC_MARKDOWN_BASE_PACAKGE
                 +File.separator;
@@ -106,7 +75,7 @@ public class MarkdownDocGenerator implements IDocGenerator {
 
         // 基础信息
         if(isAllInOne) {
-            String targetFile = genBaseDir + project.getName()+"-全部文档.md";
+            String targetFile = genBaseDir + docMavenProject.getName()+"-全部文档.md";
             log.info("Markdown 生成文档文件 all in one 路径: {}", targetFile);
             StringBuilder stringBuffer = new StringBuilder();
             for(SimplifyDocClass javaClass : simplifyDocClasses) {
@@ -145,19 +114,25 @@ public class MarkdownDocGenerator implements IDocGenerator {
     /**
      * 初始化FTL配置
      * 用户自定义：resource/idoc-markdown-class-segment.ftl
+     * @param docMavenProject maven 项目
+     * @param docConfig 文档生成配置
      */
-    private void initFtlConfig() {
+    private void initFtlConfig(final DocMavenProject docMavenProject,
+                               final DocConfig docConfig) {
         try {
+            final String baseDir = docMavenProject.getBaseDir();
+            final String encoding = docConfig.getEncoding();
+
             Configuration configuration = FreemarkerUtil.getConfiguration(encoding, true);
 
             //1. 判断根目录下是否有此文件 如果有则按照这个为准
-            final String userDefineFtl = project.getBasedir().getPath() + File.separator
+            final String userDefineFtl = baseDir + File.separator
                     + MavenConstant.SRC_MAIN_RESOURCES_PATH +
                     MarkdownConstant.Template.IDOC_MARKDOWN_CLASS_SEGMENT_FTL;
             Path path = Paths.get(userDefineFtl);
             if (Files.exists(path)) {
                 // 用户根目录自定义
-                configuration.setDirectoryForTemplateLoading(new File(project.getBasedir().getPath()
+                configuration.setDirectoryForTemplateLoading(new File(baseDir
                         + File.separator + MavenConstant.SRC_MAIN_RESOURCES_PATH));
             } else {
                 configuration.setClassForTemplateLoading(FreemarkerUtil.class,
@@ -170,4 +145,5 @@ public class MarkdownDocGenerator implements IDocGenerator {
             throw new IDocRuntimeException(e);
         }
     }
+
 }

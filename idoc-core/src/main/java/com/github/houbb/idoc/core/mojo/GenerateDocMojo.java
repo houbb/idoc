@@ -1,6 +1,6 @@
 package com.github.houbb.idoc.core.mojo;
 
-import com.github.houbb.idoc.common.config.IDocConfig;
+import com.github.houbb.idoc.api.model.config.DocConfig;
 import com.github.houbb.idoc.core.core.impl.AbstractExecuteService;
 import com.github.houbb.idoc.core.core.impl.GenerateDocService;
 import com.github.houbb.log.integration.core.Log;
@@ -99,8 +99,8 @@ public class GenerateDocMojo extends AbstractMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
         log.info("------------------------------------ Start generate doc");
 
-        IDocConfig iDocConfig = buildDocConfig();
-        AbstractExecuteService executeService = new GenerateDocService(project, iDocConfig);
+        DocConfig docConfig = buildDocConfig();
+        AbstractExecuteService executeService = new GenerateDocService(project, docConfig);
         try {
             executeService.setExcludes(excludes).setIncludes(includes);
             executeService.execute();
@@ -115,8 +115,8 @@ public class GenerateDocMojo extends AbstractMojo {
      * 构建配置信息
      * @return 配置
      */
-    private IDocConfig buildDocConfig() {
-        IDocConfig docConfig = new IDocConfig();
+    private DocConfig buildDocConfig() {
+        DocConfig docConfig = new DocConfig();
         docConfig.setEncoding(encoding);
         docConfig.setAllInOne(isAllInOne);
         docConfig.setOverwriteWhenExists(isOverwriteWhenExists);

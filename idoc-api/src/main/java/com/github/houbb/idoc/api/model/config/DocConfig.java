@@ -1,11 +1,11 @@
-package com.github.houbb.idoc.common.config;
+package com.github.houbb.idoc.api.model.config;
 
 /**
  * 文档生成配置信息
  * @author binbin.hou
  * @since 0.0.1
  */
-public class IDocConfig {
+public class DocConfig {
 
     /**
      * 是否覆盖编写

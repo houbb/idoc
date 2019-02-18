@@ -1,7 +1,9 @@
 package com.github.houbb.idoc.core.api.generator;
 
 import com.github.houbb.idoc.api.core.genenrator.IDocGenerator;
+import com.github.houbb.idoc.api.model.config.DocConfig;
 import com.github.houbb.idoc.api.model.metadata.DocClass;
+import com.github.houbb.idoc.api.model.mvn.DocMavenProject;
 import com.github.houbb.idoc.common.util.CollectionUtil;
 import com.github.houbb.idoc.core.core.impl.GenerateDocService;
 import com.github.houbb.log.integration.core.Log;
@@ -22,7 +24,7 @@ public class ConsoleDocGenerator implements IDocGenerator {
     private final Log log = LogFactory.getLog(GenerateDocService.class);
 
     @Override
-    public void generate(Collection<DocClass> docClasses) {
+    public void generate(DocMavenProject docMavenProject, DocConfig docConfig, Collection<DocClass> docClasses) {
         if(CollectionUtil.isEmpty(docClasses)) {
             log.info("------------------------------------ 文档列表为空");
         }
@@ -32,4 +34,5 @@ public class ConsoleDocGenerator implements IDocGenerator {
             log.info("[类名] " + docClass.getFullName());
         }
     }
+
 }
