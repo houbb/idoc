@@ -14,10 +14,10 @@
 
     <dependencies>
         <!--============================== SELF ==============================-->
-        <dependency>
-            <groupId>com.github.houbb</groupId>
-            <artifactId>idoc-api</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.github.houbb</groupId>-->
+            <!--<artifactId>idoc-api</artifactId>-->
+        <!--</dependency>-->
 
         <!--============================== OTHER ==============================-->
         <dependency>

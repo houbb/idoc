@@ -25,10 +25,6 @@
             <groupId>com.github.houbb</groupId>
             <artifactId>idoc-ftl</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.github.houbb</groupId>
-            <artifactId>idoc-poi</artifactId>
-        </dependency>
 
         <!--============================== INTER ==============================-->
         <dependency>
