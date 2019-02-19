@@ -60,15 +60,6 @@ public final class MetadataDocUtil {
         return CollectionUtil.buildList(javaFields, new MetadataDocFieldHandler());
     }
 
-    /**
-     * 构建方法
-     * @param javaMethods 方法
-     * @return 结果
-     */
-    public static List<DocMethod> buildDocMethodList(final JavaMethod[] javaMethods) {
-        return ArrayUtil.buildList(javaMethods, new MetadataDocMethodHandler());
-    }
-
     private MetadataDocUtil(){}
 
 }

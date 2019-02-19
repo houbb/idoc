@@ -18,4 +18,9 @@ public interface QueryUserService {
      */
     public User queryUser(final User user);
 
+    /**
+     * 空返回值测试
+     */
+    void testVoid();
+
 }

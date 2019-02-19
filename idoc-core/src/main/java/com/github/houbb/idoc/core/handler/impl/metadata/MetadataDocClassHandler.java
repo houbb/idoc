@@ -2,6 +2,7 @@ package com.github.houbb.idoc.core.handler.impl.metadata;
 
 import com.github.houbb.idoc.api.model.metadata.DocClass;
 import com.github.houbb.idoc.common.handler.AbstractHandler;
+import com.github.houbb.idoc.common.util.ArrayUtil;
 import com.github.houbb.idoc.core.util.JavaClassUtil;
 import com.github.houbb.idoc.core.util.MetadataDocUtil;
 import com.github.houbb.log.integration.core.Log;
@@ -54,7 +55,7 @@ public class MetadataDocClassHandler extends AbstractHandler<JavaClass, DocClass
 
         // 方法信息
         final JavaMethod[] javaMethods = javaClass.getMethods();
-        docClass.setDocMethodList(MetadataDocUtil.buildDocMethodList(javaMethods));
+        docClass.setDocMethodList(ArrayUtil.buildList(javaMethods, new MetadataDocMethodHandler(docClass)));
 
         return docClass;
     }

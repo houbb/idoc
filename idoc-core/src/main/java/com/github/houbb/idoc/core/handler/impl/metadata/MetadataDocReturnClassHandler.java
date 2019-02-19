@@ -15,11 +15,29 @@ import com.thoughtworks.qdox.model.JavaMethod;
  * @since 0.0.1
  */
 public class MetadataDocReturnClassHandler extends AbstractHandler<JavaMethod, DocClass> {
+
+    /**
+     * 当前方法对应的类信息
+     */
+    private final DocClass docClass;
+
+    public MetadataDocReturnClassHandler(DocClass docClass) {
+        this.docClass = docClass;
+    }
+
     @Override
     protected DocClass doHandle(JavaMethod javaMethod) {
         // 如果有一个方法，在方法体中返回当前类。就会导致死循环
+        // void 对应的返回类型是什么？
         JavaClass returnClass = javaMethod.getReturnType() == null ? null : javaMethod.getReturnType().getJavaClass();
-        DocClass docClass = new MetadataDocClassHandler().handle(returnClass);
+        // 这个地方可以单独使用 DocReturnClass 对象
+        DocClass docReturnClass = new DocClass();
+        if(isDeadCycle(docClass, returnClass)) {
+            // 对象属性赋值
+
+        } else {
+            docReturnClass = new MetadataDocClassHandler().handle(returnClass);
+        }
 
         // 注释
         DocletTag docletTag = javaMethod.getTagByName(JavaTagConstant.RETURN);
@@ -27,6 +45,19 @@ public class MetadataDocReturnClassHandler extends AbstractHandler<JavaMethod, D
             docClass.setMethodComment(docletTag.getValue());
         }
         return docClass;
+    }
+
+    /**
+     * 是否为死循环
+     * @param originalClass 原始类
+     * @param returnClass 返回类
+     * @return 是否
+     */
+    private boolean isDeadCycle(final DocClass originalClass, JavaClass returnClass) {
+        if(originalClass.getFullName().equals(returnClass.getFullyQualifiedName())) {
+            return true;
+        }
+        return false;
     }
 
 }

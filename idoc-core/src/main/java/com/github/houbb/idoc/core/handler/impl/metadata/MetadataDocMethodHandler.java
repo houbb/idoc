@@ -1,5 +1,6 @@
 package com.github.houbb.idoc.core.handler.impl.metadata;
 
+import com.github.houbb.idoc.api.model.config.DocConfig;
 import com.github.houbb.idoc.api.model.metadata.*;
 import com.github.houbb.idoc.common.handler.AbstractHandler;
 import com.github.houbb.idoc.common.util.ArrayUtil;
@@ -17,6 +18,15 @@ import java.util.List;
  * @since 0.0.1
  */
 public class MetadataDocMethodHandler extends AbstractHandler<JavaMethod, DocMethod> {
+
+    /**
+     * 当前方法对应的类信息
+     */
+    private final DocClass docClass;
+
+    public MetadataDocMethodHandler(DocClass docClass) {
+        this.docClass = docClass;
+    }
 
     @Override
     protected DocMethod doHandle(JavaMethod javaMethod) {
@@ -39,11 +49,11 @@ public class MetadataDocMethodHandler extends AbstractHandler<JavaMethod, DocMet
 
         // 返回类型
         //TODO: 方法的入参/出参等于当前对象，则直接返回当前对象即可。不要再递归获取，会死循环。
-        final DocClass docReturnClass = new MetadataDocReturnClassHandler().handle(javaMethod);
+        final DocClass docReturnClass = new MetadataDocReturnClassHandler(docClass).handle(javaMethod);
         docMethod.setDocReturnClass(docReturnClass);
 
         // 参数信息
-        final List<DocParameter> docParameterList = new MetadataDocParameterHandler().handle(javaMethod);
+        final List<DocParameter> docParameterList = new MetadataDocParameterHandler(docClass).handle(javaMethod);
         docMethod.setDocParameterList(docParameterList);
         return docMethod;
     }

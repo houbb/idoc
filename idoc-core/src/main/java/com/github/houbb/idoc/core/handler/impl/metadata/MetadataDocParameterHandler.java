@@ -1,5 +1,6 @@
 package com.github.houbb.idoc.core.handler.impl.metadata;
 
+import com.github.houbb.idoc.api.model.metadata.DocClass;
 import com.github.houbb.idoc.api.model.metadata.DocParameter;
 import com.github.houbb.idoc.common.handler.AbstractHandler;
 import com.github.houbb.idoc.common.handler.IHandler;
@@ -20,6 +21,15 @@ import java.util.List;
  * @since 0.0.1
  */
 public class MetadataDocParameterHandler extends AbstractHandler<JavaMethod, List<DocParameter>> {
+
+    /**
+     * 当前方法对应的类信息
+     */
+    private final DocClass docClass;
+
+    public MetadataDocParameterHandler(DocClass docClass) {
+        this.docClass = docClass;
+    }
 
     @Override
     protected List<DocParameter> doHandle(final JavaMethod javaMethod) {
