@@ -48,7 +48,7 @@ public class MetadataDocMethodParameterHandler extends AbstractHandler<JavaMetho
                 // 8大基本类型+Number 类型。
                 // 如何判断是否为用户自定义类型：让用户指定自己的包名称前缀。
                 // 常规的判断方式，排除掉 jdk 自带的类型，其他全部为自定义类型。(推荐这种方式)
-                if (!JavaClassUtil.isPrimitiveOrJdk(javaParameter.getType())) {
+                if (needEntryFieldHandle(javaParameter)) {
                     final List<JavaField> javaFieldList = JavaClassUtil
                             .getAllJavaFieldList(javaParameter.getType().getJavaClass());
                     docMethodParameter.setDocFieldList(MetadataDocUtil.buildDocFieldList(javaFieldList));
@@ -71,6 +71,21 @@ public class MetadataDocMethodParameterHandler extends AbstractHandler<JavaMetho
                 return docMethodParameter;
             }
         });
+    }
+
+    /**
+     * 是否需要吃力明细列表
+     * @param javaParameter 参数
+     * @return 是否需要
+     */
+    private boolean needEntryFieldHandle(final JavaParameter javaParameter) {
+        if(JavaClassUtil.isPrimitiveOrJdk(javaParameter.getType())) {
+            return false;
+        }
+        if(docClass.getFullName().equals(javaParameter.getType().getFullyQualifiedName())) {
+            return false;
+        }
+        return true;
     }
 
 }

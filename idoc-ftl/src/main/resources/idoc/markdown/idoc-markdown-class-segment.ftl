@@ -1,11 +1,13 @@
 <#if class??>
 # ${class.name}-${class.comment!""}
-${class.remark!""}
+
+${class.remark!"暂无类备注信息"}
 
 <#if class.methods??>
 <#list class.methods as method>
 ## ${method.name}-${method.comment!""}
-${method.remark!""}
+
+${method.remark!"暂无方法备注信息"}
 
 ### 方法入参
 
@@ -13,16 +15,14 @@ ${method.remark!""}
 |:---|:---|:---|:---|:----|
 <#if method.params?? && (method.params?size > 0)>
 <#list method.params as param>
-| ${param.name} | ${param.comment!""} | ${param.type!""} | ${param.required!""} | ${param.remark!""} |
+| ${param.name} | ${param.comment!""} | ${param.type!""} | ${param.require!""} | ${param.remark!""} |
 </#list>
 <#else>
 暂无入参
 </#if>
 
 #### 方法入参详情
-
 <#if method.paramDetails?? && (method.paramDetails?size > 0)>
-
 <#list method.paramDetails?keys as detailName>
 
 - ${detailName} 入参详情
@@ -30,9 +30,8 @@ ${method.remark!""}
 | 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
 |:---|:---|:---|:---|:----|
 <#list method.paramDetails[detailName] as param>
-| ${param.name} | ${param.comment!""} | ${param.type!""} | ${param.required!""} | ${param.remark!""} |
+| ${param.name} | ${param.comment!""} | ${param.type!""} | ${param.require!""} | ${param.remark!""} |
 </#list>
-
 </#list>
 <#else>
 暂无入参详情
@@ -62,7 +61,6 @@ ${method.remark!""}
 <#list method.returnDetails[detailName] as param>
 | ${param.name} | ${param.comment!""} | ${param.type!""} | ${param.remark!""} |
 </#list>
-
 </#list>
 <#else>
 暂无入参详情

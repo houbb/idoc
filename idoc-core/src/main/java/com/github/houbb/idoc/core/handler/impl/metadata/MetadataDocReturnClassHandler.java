@@ -63,7 +63,17 @@ public class MetadataDocReturnClassHandler extends AbstractHandler<JavaMethod, D
      */
     private void fillDocMethodReturn(DocMethodReturn docMethodReturn,
                                                 final DocClass docClass) {
-        //TODO: 使用 BeanUtils 直接赋值
+        //TODO: 下个版本使用 BeanUtils 直接赋值
+        docMethodReturn.setDocFieldList(docClass.getDocFieldList());
+        docMethodReturn.setDocMethodList(docClass.getDocMethodList());
+        docMethodReturn.setFullName(docClass.getFullName());
+        docMethodReturn.setPackageName(docClass.getPackageName());
+        docMethodReturn.setName(docClass.getName());
+        docMethodReturn.setAuthorList(docClass.getAuthorList());
+        docMethodReturn.setComment(docClass.getComment());
+        docMethodReturn.setModifiers(docClass.getModifiers());
+        docMethodReturn.setDocAnnotationList(docClass.getDocAnnotationList());
+        docMethodReturn.setRemark(docClass.getRemark());
     }
 
     /**

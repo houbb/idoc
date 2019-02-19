@@ -24,7 +24,7 @@ public class SimplifyDocFieldHandler implements IHandler<DocField, SimplifyDocFi
         simplifyDocField.setName(docField.getName());
         simplifyDocField.setComment(docField.getComment());
         simplifyDocField.setType(docField.getType());
-        simplifyDocField.setRequired(docField.getRequired());
+        simplifyDocField.setRequire(docField.getRequire());
         simplifyDocField.setRemark(docField.getRemark());
 
         // 处理特殊字段信息 比如集合字段

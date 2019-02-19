@@ -14,7 +14,6 @@
         <module>idoc-core</module>
         <module>idoc-test</module>
         <module>idoc-ftl</module>
-        <module>idoc-poi</module>
         <module>idoc-common</module>
     </modules>
 

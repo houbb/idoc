@@ -30,7 +30,7 @@ public class MetadataDocFieldHandler extends AbstractHandler<JavaField, DocField
         DocletTag remarkTag = javaField.getTagByName(JavaTagConstant.IDOC_REMARK);
 
         if (ObjectUtil.isNotNull(requireTag)) {
-            docField.setRequired(requireTag.getValue());
+            docField.setRequire(requireTag.getValue());
         }
         if (ObjectUtil.isNotNull(remarkTag)) {
             docField.setRemark(remarkTag.getValue());

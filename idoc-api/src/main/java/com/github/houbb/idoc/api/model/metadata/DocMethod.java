@@ -29,12 +29,6 @@ public final class DocMethod extends BaseDoc {
      */
     private DocMethodReturn docMethodReturn;
 
-    /**
-     * 返回对象
-     */
-    @Deprecated
-    private DocClass docReturnClass;
-
     //TODO 异常信息 + @see 列表信息
 
     public String getSignature() {
@@ -69,11 +63,4 @@ public final class DocMethod extends BaseDoc {
         this.docMethodReturn = docMethodReturn;
     }
 
-    public DocClass getDocReturnClass() {
-        return docReturnClass;
-    }
-
-    public void setDocReturnClass(DocClass docReturnClass) {
-        this.docReturnClass = docReturnClass;
-    }
 }

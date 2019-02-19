@@ -17,7 +17,7 @@ public final class DocField extends BaseDoc {
     /**
      * 是否需要
      */
-    private String required;
+    private String require;
 
     /**
      * 当前入参下面的字段信息
@@ -32,12 +32,12 @@ public final class DocField extends BaseDoc {
         this.type = type;
     }
 
-    public String getRequired() {
-        return required;
+    public String getRequire() {
+        return require;
     }
 
-    public void setRequired(String required) {
-        this.required = required;
+    public void setRequire(String require) {
+        this.require = require;
     }
 
     public List<DocField> getDocFieldList() {

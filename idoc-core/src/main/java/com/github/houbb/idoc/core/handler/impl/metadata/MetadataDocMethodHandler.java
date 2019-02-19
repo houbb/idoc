@@ -46,9 +46,8 @@ public class MetadataDocMethodHandler extends AbstractHandler<JavaMethod, DocMet
         docMethod.setDocTagList(docTagList);
 
         // 返回类型
-        //TODO: 方法的入参/出参等于当前对象，则直接返回当前对象即可。不要再递归获取，会死循环。
-        final DocClass docReturnClass = new MetadataDocReturnClassHandler(docClass).handle(javaMethod);
-        docMethod.setDocReturnClass(docReturnClass);
+        final DocMethodReturn docReturnClass = new MetadataDocReturnClassHandler(docClass).handle(javaMethod);
+        docMethod.setDocMethodReturn(docReturnClass);
 
         // 参数信息
         final List<DocMethodParameter> docMethodParameterList = new MetadataDocMethodParameterHandler(docClass).handle(javaMethod);

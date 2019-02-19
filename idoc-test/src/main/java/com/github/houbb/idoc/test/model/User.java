@@ -70,11 +70,11 @@ public class User {
         this.addressList = addressList;
     }
 
-//    public User getMate() {
-//        return mate;
-//    }
-//
-//    public void setMate(User mate) {
-//        this.mate = mate;
-//    }
+    public User getMate() {
+        return mate;
+    }
+
+    public void setMate(User mate) {
+        this.mate = mate;
+    }
 }

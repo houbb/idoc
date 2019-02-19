@@ -18,7 +18,7 @@ public class SimplifyDocField extends SimplifyDocBase {
     /**
      * 是否必填
      */
-    private String required;
+    private String require;
 
     /**
      * 详情列表信息
@@ -33,12 +33,12 @@ public class SimplifyDocField extends SimplifyDocBase {
         this.type = type;
     }
 
-    public String getRequired() {
-        return required;
+    public String getRequire() {
+        return require;
     }
 
-    public void setRequired(String required) {
-        this.required = required;
+    public void setRequire(String require) {
+        this.require = require;
     }
 
     public List<SimplifyDocField> getEntries() {

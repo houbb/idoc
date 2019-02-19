@@ -1,19 +1,25 @@
 package com.github.houbb.idoc.common.handler.impl.simplify;
 
-import com.github.houbb.idoc.api.model.metadata.DocClass;
 import com.github.houbb.idoc.api.model.metadata.DocField;
 import com.github.houbb.idoc.api.model.metadata.DocMethod;
 import com.github.houbb.idoc.api.model.metadata.DocMethodParameter;
+import com.github.houbb.idoc.api.model.metadata.DocMethodReturn;
 import com.github.houbb.idoc.common.handler.IHandler;
 import com.github.houbb.idoc.common.model.SimplifyDocField;
 import com.github.houbb.idoc.common.model.SimplifyDocMethod;
 import com.github.houbb.idoc.common.util.CollectionUtil;
+import com.github.houbb.idoc.common.util.ObjectUtil;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
+ * 简化方法属性处理类
  * @author binbin.hou
  * date 2019/2/15
+ * @since 0.0.1
  */
 public class SimplifyMethodHandler implements IHandler<DocMethod, SimplifyDocMethod> {
     @Override
@@ -30,7 +36,7 @@ public class SimplifyMethodHandler implements IHandler<DocMethod, SimplifyDocMet
         final List<SimplifyDocField> params = buildParams(docMethod.getDocMethodParameterList());
 
         // 处理出参
-        final List<SimplifyDocField> returns = buildRuturns(docMethod.getDocReturnClass());
+        final List<SimplifyDocField> returns = buildRuturns(docMethod.getDocMethodReturn());
 
         commonDocMethod.setParams(params);
         commonDocMethod.setReturns(returns);
@@ -50,16 +56,16 @@ public class SimplifyMethodHandler implements IHandler<DocMethod, SimplifyDocMet
 
     /**
      * 构建返回值结果
-     * @param returnDocClass 返回结果
+     * @param docMethodReturn 返回结果
      * @return 构建后的参数列表
      */
-    private List<SimplifyDocField> buildRuturns(final DocClass returnDocClass) {
-        if(null == returnDocClass) {
+    private List<SimplifyDocField> buildRuturns(final DocMethodReturn docMethodReturn) {
+        if(ObjectUtil.isNull(docMethodReturn)) {
             return Collections.emptyList();
         }
 
         // 当前返回类的所有字段信息
-        final List<DocField> docFieldList = returnDocClass.getDocFieldList();
+        final List<DocField> docFieldList = docMethodReturn.getDocFieldList();
         return CollectionUtil.buildList(docFieldList, new SimplifyDocFieldHandler());
     }
 

@@ -27,29 +27,29 @@
 
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.github.houbb</groupId>
-                <artifactId>idoc-core</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-                <configuration>
-                    <isAllInOne>true</isAllInOne>
-                    <generates>
-                        <generate>com.github.houbb.idoc.ftl.api.generator.MarkdownDocGenerator</generate>
-                    </generates>
-                    <generateFilters>
-                        <generateFilter>com.github.houbb.idoc.test.filter.MyGenerateFilter</generateFilter>
-                    </generateFilters>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.github.houbb</groupId>
-                        <artifactId>idoc-test</artifactId>
-                        <version>${project.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-        </plugins>
-    </build>
+    <!--<build>-->
+        <!--<plugins>-->
+            <!--<plugin>-->
+                <!--<groupId>com.github.houbb</groupId>-->
+                <!--<artifactId>idoc-core</artifactId>-->
+                <!--<version>0.0.1-SNAPSHOT</version>-->
+                <!--<configuration>-->
+                    <!--<isAllInOne>true</isAllInOne>-->
+                    <!--<generates>-->
+                        <!--<generate>com.github.houbb.idoc.ftl.api.generator.MarkdownDocGenerator</generate>-->
+                    <!--</generates>-->
+                    <!--<generateFilters>-->
+                        <!--<generateFilter>com.github.houbb.idoc.test.filter.MyGenerateFilter</generateFilter>-->
+                    <!--</generateFilters>-->
+                <!--</configuration>-->
+                <!--<dependencies>-->
+                    <!--<dependency>-->
+                        <!--<groupId>com.github.houbb</groupId>-->
+                        <!--<artifactId>idoc-test</artifactId>-->
+                        <!--<version>${project.version}</version>-->
+                    <!--</dependency>-->
+                <!--</dependencies>-->
+            <!--</plugin>-->
+        <!--</plugins>-->
+    <!--</build>-->
 </project>
