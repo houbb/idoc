@@ -1,9 +1,7 @@
 package com.github.houbb.idoc.core.handler.impl.metadata;
 
-import com.github.houbb.idoc.api.model.config.DocConfig;
 import com.github.houbb.idoc.api.model.metadata.*;
 import com.github.houbb.idoc.common.handler.AbstractHandler;
-import com.github.houbb.idoc.common.util.ArrayUtil;
 import com.github.houbb.idoc.common.util.ObjectUtil;
 import com.github.houbb.idoc.core.constant.JavaTagConstant;
 import com.github.houbb.idoc.core.util.MetadataDocUtil;
@@ -53,8 +51,8 @@ public class MetadataDocMethodHandler extends AbstractHandler<JavaMethod, DocMet
         docMethod.setDocReturnClass(docReturnClass);
 
         // 参数信息
-        final List<DocParameter> docParameterList = new MetadataDocParameterHandler(docClass).handle(javaMethod);
-        docMethod.setDocParameterList(docParameterList);
+        final List<DocMethodParameter> docMethodParameterList = new MetadataDocMethodParameterHandler(docClass).handle(javaMethod);
+        docMethod.setDocMethodParameterList(docMethodParameterList);
         return docMethod;
     }
 }

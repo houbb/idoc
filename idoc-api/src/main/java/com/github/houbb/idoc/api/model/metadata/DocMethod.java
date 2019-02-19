@@ -22,14 +22,20 @@ public final class DocMethod extends BaseDoc {
     /**
      * 参数列表
      */
-    private List<DocParameter> docParameterList;
+    private List<DocMethodParameter> docMethodParameterList;
+
+    /**
+     * 方法返回对象
+     */
+    private DocMethodReturn docMethodReturn;
 
     /**
      * 返回对象
      */
+    @Deprecated
     private DocClass docReturnClass;
 
-    //TODO 异常信息
+    //TODO 异常信息 + @see 列表信息
 
     public String getSignature() {
         return signature;
@@ -47,12 +53,20 @@ public final class DocMethod extends BaseDoc {
         this.sourceCode = sourceCode;
     }
 
-    public List<DocParameter> getDocParameterList() {
-        return docParameterList;
+    public List<DocMethodParameter> getDocMethodParameterList() {
+        return docMethodParameterList;
     }
 
-    public void setDocParameterList(List<DocParameter> docParameterList) {
-        this.docParameterList = docParameterList;
+    public void setDocMethodParameterList(List<DocMethodParameter> docMethodParameterList) {
+        this.docMethodParameterList = docMethodParameterList;
+    }
+
+    public DocMethodReturn getDocMethodReturn() {
+        return docMethodReturn;
+    }
+
+    public void setDocMethodReturn(DocMethodReturn docMethodReturn) {
+        this.docMethodReturn = docMethodReturn;
     }
 
     public DocClass getDocReturnClass() {

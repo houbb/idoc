@@ -1,7 +1,7 @@
 package com.github.houbb.idoc.core.handler.impl.metadata;
 
 import com.github.houbb.idoc.api.model.metadata.DocClass;
-import com.github.houbb.idoc.api.model.metadata.DocParameter;
+import com.github.houbb.idoc.api.model.metadata.DocMethodParameter;
 import com.github.houbb.idoc.common.handler.AbstractHandler;
 import com.github.houbb.idoc.common.handler.IHandler;
 import com.github.houbb.idoc.common.util.ArrayUtil;
@@ -20,29 +20,29 @@ import java.util.List;
  * @author binbin.hou
  * @since 0.0.1
  */
-public class MetadataDocParameterHandler extends AbstractHandler<JavaMethod, List<DocParameter>> {
+public class MetadataDocMethodParameterHandler extends AbstractHandler<JavaMethod, List<DocMethodParameter>> {
 
     /**
      * 当前方法对应的类信息
      */
     private final DocClass docClass;
 
-    public MetadataDocParameterHandler(DocClass docClass) {
+    public MetadataDocMethodParameterHandler(DocClass docClass) {
         this.docClass = docClass;
     }
 
     @Override
-    protected List<DocParameter> doHandle(final JavaMethod javaMethod) {
+    protected List<DocMethodParameter> doHandle(final JavaMethod javaMethod) {
         final JavaParameter[] javaParameters = javaMethod.getParameters();
-        return ArrayUtil.buildList(javaParameters, new IHandler<JavaParameter, DocParameter>() {
+        return ArrayUtil.buildList(javaParameters, new IHandler<JavaParameter, DocMethodParameter>() {
             @Override
-            public DocParameter handle(JavaParameter javaParameter) {
+            public DocMethodParameter handle(JavaParameter javaParameter) {
                 final String paramName = javaParameter.getName();
-                DocParameter docParameter = new DocParameter();
-                docParameter.setName(paramName);
-                docParameter.setDocAnnotationList(MetadataDocUtil
+                DocMethodParameter docMethodParameter = new DocMethodParameter();
+                docMethodParameter.setName(paramName);
+                docMethodParameter.setDocAnnotationList(MetadataDocUtil
                         .buildDocAnnotationList(javaParameter.getAnnotations()));
-                docParameter.setType(javaParameter.getType().getFullyQualifiedName());
+                docMethodParameter.setType(javaParameter.getType().getFullyQualifiedName());
                 // 基础类型和非基础类型
                 // 初期版本可以做的比较简单，固定写死常见字段类型。
                 // 8大基本类型+Number 类型。
@@ -51,7 +51,7 @@ public class MetadataDocParameterHandler extends AbstractHandler<JavaMethod, Lis
                 if (!JavaClassUtil.isPrimitiveOrJdk(javaParameter.getType())) {
                     final List<JavaField> javaFieldList = JavaClassUtil
                             .getAllJavaFieldList(javaParameter.getType().getJavaClass());
-                    docParameter.setDocFieldList(MetadataDocUtil.buildDocFieldList(javaFieldList));
+                    docMethodParameter.setDocFieldList(MetadataDocUtil.buildDocFieldList(javaFieldList));
                 }
                 DocletTag[] docletTags = javaMethod.getTagsByName(JavaTagConstant.PARAM);
                 if (ArrayUtil.isNotEmpty(docletTags)) {
@@ -63,12 +63,12 @@ public class MetadataDocParameterHandler extends AbstractHandler<JavaMethod, Lis
                         if (ArrayUtil.isNotEmpty(strings)
                                 && paramName.equalsIgnoreCase(strings[0])
                                 && strings.length >= 2) {
-                            docParameter.setComment(strings[1]);
+                            docMethodParameter.setComment(strings[1]);
                             break;
                         }
                     }
                 }
-                return docParameter;
+                return docMethodParameter;
             }
         });
     }

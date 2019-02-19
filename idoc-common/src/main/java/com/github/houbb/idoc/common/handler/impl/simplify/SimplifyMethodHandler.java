@@ -3,7 +3,7 @@ package com.github.houbb.idoc.common.handler.impl.simplify;
 import com.github.houbb.idoc.api.model.metadata.DocClass;
 import com.github.houbb.idoc.api.model.metadata.DocField;
 import com.github.houbb.idoc.api.model.metadata.DocMethod;
-import com.github.houbb.idoc.api.model.metadata.DocParameter;
+import com.github.houbb.idoc.api.model.metadata.DocMethodParameter;
 import com.github.houbb.idoc.common.handler.IHandler;
 import com.github.houbb.idoc.common.model.SimplifyDocField;
 import com.github.houbb.idoc.common.model.SimplifyDocMethod;
@@ -27,7 +27,7 @@ public class SimplifyMethodHandler implements IHandler<DocMethod, SimplifyDocMet
         commonDocMethod.setName(docMethod.getName());
 
         // 处理入参
-        final List<SimplifyDocField> params = buildParams(docMethod.getDocParameterList());
+        final List<SimplifyDocField> params = buildParams(docMethod.getDocMethodParameterList());
 
         // 处理出参
         final List<SimplifyDocField> returns = buildRuturns(docMethod.getDocReturnClass());
@@ -41,11 +41,11 @@ public class SimplifyMethodHandler implements IHandler<DocMethod, SimplifyDocMet
 
     /**
      * 构建入参信息
-     * @param docParameterList 原始参数列表
+     * @param docMethodParameterList 原始参数列表
      * @return 构建后的参数结果
      */
-    private List<SimplifyDocField> buildParams(final List<DocParameter> docParameterList) {
-        return CollectionUtil.buildList(docParameterList, new SimplifyParamFieldHandler());
+    private List<SimplifyDocField> buildParams(final List<DocMethodParameter> docMethodParameterList) {
+        return CollectionUtil.buildList(docMethodParameterList, new SimplifyParamFieldHandler());
     }
 
     /**

@@ -3,11 +3,11 @@ package com.github.houbb.idoc.api.model.metadata;
 import java.util.List;
 
 /**
- * 参数信息
+ * 方法参数信息
  * @author binbin.hou
  * @since 0.0.1
  */
-public final class DocParameter extends BaseDoc {
+public final class DocMethodParameter extends BaseDoc {
 
     /**
      * 参数类型
@@ -37,7 +37,7 @@ public final class DocParameter extends BaseDoc {
 
     @Override
     public String toString() {
-        return "DocParameter{" +
+        return "DocMethodParameter{" +
                 "type='" + type + '\'' +
                 ", docFieldList=" + docFieldList +
                 "} " + super.toString();
