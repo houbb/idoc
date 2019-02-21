@@ -52,6 +52,9 @@ public final class CollectionUtil {
         List<R> rList = new ArrayList<>(targets.size());
         for(T t : targets) {
             R r = handler.handle(t);
+            if(ObjectUtil.isNull(t)) {
+                continue;
+            }
             rList.add(r);
         }
         return rList;

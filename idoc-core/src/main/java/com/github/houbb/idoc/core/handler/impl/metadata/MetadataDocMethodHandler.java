@@ -2,6 +2,8 @@ package com.github.houbb.idoc.core.handler.impl.metadata;
 
 import com.github.houbb.idoc.api.model.metadata.*;
 import com.github.houbb.idoc.common.handler.AbstractHandler;
+import com.github.houbb.idoc.common.util.ArrayUtil;
+import com.github.houbb.idoc.common.util.CollectionUtil;
 import com.github.houbb.idoc.common.util.ObjectUtil;
 import com.github.houbb.idoc.core.constant.JavaTagConstant;
 import com.github.houbb.idoc.core.util.MetadataDocUtil;
@@ -39,7 +41,6 @@ public class MetadataDocMethodHandler extends AbstractHandler<JavaMethod, DocMet
             docMethod.setSince(docletTag.getValue());
         }
 
-
         // tags 信息
         DocletTag[] docletTags = javaMethod.getTags();
         List<DocTag> docTagList = MetadataDocUtil.buildDocTagList(docletTags);
@@ -52,6 +53,18 @@ public class MetadataDocMethodHandler extends AbstractHandler<JavaMethod, DocMet
         // 参数信息
         final List<DocMethodParameter> docMethodParameterList = new MetadataDocMethodParameterHandler(docClass).handle(javaMethod);
         docMethod.setDocMethodParameterList(docMethodParameterList);
+
+        // @see 列表信息添加
+        DocletTag[] seeDocletTags = javaMethod.getTagsByName(JavaTagConstant.SEE);
+        List<DocClass> seeDocClassList = ArrayUtil.buildList(seeDocletTags, new MetadataDocSeeListHandler());
+        docMethod.setSeeList(seeDocClassList);
+
+        // 抛出的异常信息列表
+        DocletTag[] throwDocletTags = javaMethod.getTagsByName(JavaTagConstant.THROWS);
+        List<DocClass> throwDocClassList = ArrayUtil.buildList(throwDocletTags, new MetadataDocSeeListHandler());
+        docMethod.setExceptionList(throwDocClassList);
+
         return docMethod;
     }
+
 }

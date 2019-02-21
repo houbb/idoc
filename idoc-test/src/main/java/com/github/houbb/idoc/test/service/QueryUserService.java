@@ -6,7 +6,6 @@ import com.github.houbb.idoc.test.model.User;
  * 查询用户服务类
  * @author binbin.hou
  * @since 0.0.1
- * date 2019/2/12
  */
 public interface QueryUserService {
 

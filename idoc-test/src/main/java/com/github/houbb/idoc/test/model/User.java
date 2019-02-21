@@ -5,11 +5,9 @@ import java.util.List;
 
 /**
  * 用户信息
- * TODO: 循环依赖的 BUG 处理, User 下面依赖 User 对象
  * @author binbin.hou
- * date 2019/2/12
+ * @since 0.0.1
  */
-@Deprecated
 public class User {
 
     /**

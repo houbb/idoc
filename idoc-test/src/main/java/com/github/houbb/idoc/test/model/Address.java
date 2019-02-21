@@ -1,8 +1,9 @@
 package com.github.houbb.idoc.test.model;
 
 /**
+ * 地址
  * @author binbin.hou
- * date 2019/2/18
+ * @since 0.0.1
  */
 public class Address {
 

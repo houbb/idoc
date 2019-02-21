@@ -26,7 +26,7 @@ public class MetadataDocAnnotationHandler extends AbstractHandler<Annotation, Do
 
         docAnnotation.setNamedParameters(target.getNamedParameterMap());
         docAnnotation.setProperties(target.getPropertyMap());
-        //TODO 具体的实现
+        //TODO: 其他属性信息
         return docAnnotation;
     }
 

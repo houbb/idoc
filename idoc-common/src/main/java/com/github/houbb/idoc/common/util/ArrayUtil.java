@@ -47,6 +47,9 @@ public final class ArrayUtil {
         List<R> rList = new ArrayList<>(targets.length);
         for(T t : targets) {
             R r = handler.handle(t);
+            if(ObjectUtil.isNull(t)) {
+                continue;
+            }
             rList.add(r);
         }
         return rList;
