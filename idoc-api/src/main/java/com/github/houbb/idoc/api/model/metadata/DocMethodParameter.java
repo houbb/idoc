@@ -35,11 +35,4 @@ public final class DocMethodParameter extends BaseDoc {
         this.docFieldList = docFieldList;
     }
 
-    @Override
-    public String toString() {
-        return "DocMethodParameter{" +
-                "type='" + type + '\'' +
-                ", docFieldList=" + docFieldList +
-                "} " + super.toString();
-    }
 }

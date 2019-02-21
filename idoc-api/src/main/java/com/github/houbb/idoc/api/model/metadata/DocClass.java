@@ -16,7 +16,9 @@ public class DocClass extends BaseDoc {
 
     /**
      * 当作为方法的参数/返回值的时候
+     * @since 0.0.1 开始废弃，不建议使用
      */
+    @Deprecated
     private String methodComment;
 
     /**
@@ -48,6 +50,12 @@ public class DocClass extends BaseDoc {
      * 父类
      */
     private DocClass parentClass;
+
+    /**
+     * 包信息
+     * @since 0.0.2
+     */
+    private DocPackage docPackage;
 
     public String getMethodComment() {
         return methodComment;
@@ -113,16 +121,4 @@ public class DocClass extends BaseDoc {
         this.parentClass = parentClass;
     }
 
-    @Override
-    public String toString() {
-        return "DocClass{" +
-                "fullName='" + fullName + '\'' +
-                ", packageName='" + packageName + '\'' +
-                ", docMethodList=" + docMethodList +
-                ", docFieldList=" + docFieldList +
-                ", nestClassList=" + nestClassList +
-                ", interfaceClassList=" + interfaceClassList +
-                ", parentClass=" + parentClass +
-                "} " + super.toString();
-    }
 }

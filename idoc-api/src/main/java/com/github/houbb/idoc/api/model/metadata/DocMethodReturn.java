@@ -74,5 +74,4 @@ public class DocMethodReturn extends BaseDoc {
         this.docFieldList = docFieldList;
     }
 
-
 }

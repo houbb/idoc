@@ -1,5 +1,6 @@
 package com.github.houbb.idoc.api.model.metadata;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -139,4 +140,5 @@ public class BaseDoc {
     public void setSeeList(List<DocClass> seeList) {
         this.seeList = seeList;
     }
+
 }

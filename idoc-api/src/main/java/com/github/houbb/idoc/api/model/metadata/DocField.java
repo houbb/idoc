@@ -47,4 +47,5 @@ public final class DocField extends BaseDoc {
     public void setDocFieldList(List<DocField> docFieldList) {
         this.docFieldList = docFieldList;
     }
+
 }

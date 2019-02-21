@@ -1,5 +1,6 @@
 package com.github.houbb.idoc.core.api.generator;
 
+import com.alibaba.fastjson.JSON;
 import com.github.houbb.idoc.api.core.genenrator.IDocGenerator;
 import com.github.houbb.idoc.api.model.config.DocConfig;
 import com.github.houbb.idoc.api.model.metadata.DocClass;
@@ -31,7 +32,9 @@ public class ConsoleDocGenerator implements IDocGenerator {
 
         log.info("------------------------------------ 文档信息如下：");
         for(DocClass docClass : docClasses) {
-            log.info("[类名] " + docClass.getFullName());
+            System.out.println("[类名] " + docClass.getFullName());
+            System.out.println("[类信息] " + JSON.toJSONString(docClass));
+            System.out.println();
         }
     }
 

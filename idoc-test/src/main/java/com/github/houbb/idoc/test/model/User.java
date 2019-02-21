@@ -9,6 +9,7 @@ import java.util.List;
  * @author binbin.hou
  * date 2019/2/12
  */
+@Deprecated
 public class User {
 
     /**

@@ -29,7 +29,11 @@ public final class DocMethod extends BaseDoc {
      */
     private DocMethodReturn docMethodReturn;
 
-    //TODO 异常信息 + @see 列表信息
+    /**
+     * 抛出的异常信息列表
+     * @since 0.0.2
+     */
+    private List<DocClass> exceptionList;
 
     public String getSignature() {
         return signature;
@@ -61,6 +65,14 @@ public final class DocMethod extends BaseDoc {
 
     public void setDocMethodReturn(DocMethodReturn docMethodReturn) {
         this.docMethodReturn = docMethodReturn;
+    }
+
+    public List<DocClass> getExceptionList() {
+        return exceptionList;
+    }
+
+    public void setExceptionList(List<DocClass> exceptionList) {
+        this.exceptionList = exceptionList;
     }
 
 }

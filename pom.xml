@@ -49,6 +49,7 @@
         <poi.version>3.9</poi.version>
         <poi-ooxml-schemas.version>3.9</poi-ooxml-schemas.version>
         <poi-ooxml.version>3.7</poi-ooxml.version>
+        <fastjson.version>1.2.7</fastjson.version>
     </properties>
 
     <dependencyManagement>
@@ -146,6 +147,13 @@
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi-ooxml-schemas</artifactId>
                 <version>${poi-ooxml-schemas.version}</version>
+            </dependency>
+
+            <!-- json -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
             </dependency>
 
         </dependencies>

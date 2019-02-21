@@ -53,6 +53,10 @@
             <groupId>com.thoughtworks.qdox</groupId>
             <artifactId>qdox</artifactId>
         </dependency>
-
+        <!-- json -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
     </dependencies>
 </project>
