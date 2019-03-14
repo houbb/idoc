@@ -10,7 +10,6 @@ public class SimplifyDocField extends SimplifyDocBase {
 
     /**
      * 字段类型
-     * TODO：字段显示类型映射处理
      * 支持用户自定义
      */
     private String type;
@@ -19,6 +18,12 @@ public class SimplifyDocField extends SimplifyDocBase {
      * 是否必填
      */
     private String require;
+
+    /**
+     * 字段类型别名
+     * @since 0.1.0
+     */
+    private String typeAlias;
 
     /**
      * 详情列表信息
@@ -47,5 +52,13 @@ public class SimplifyDocField extends SimplifyDocBase {
 
     public void setEntries(List<SimplifyDocField> entries) {
         this.entries = entries;
+    }
+
+    public String getTypeAlias() {
+        return typeAlias;
+    }
+
+    public void setTypeAlias(String typeAlias) {
+        this.typeAlias = typeAlias;
     }
 }

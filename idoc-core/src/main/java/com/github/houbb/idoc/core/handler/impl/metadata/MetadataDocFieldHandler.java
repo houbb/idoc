@@ -1,11 +1,14 @@
 package com.github.houbb.idoc.core.handler.impl.metadata;
 
+import com.github.houbb.idoc.api.model.config.DocConfig;
 import com.github.houbb.idoc.api.model.metadata.DocField;
 import com.github.houbb.idoc.common.handler.AbstractHandler;
+import com.github.houbb.idoc.common.util.CollectionUtil;
 import com.github.houbb.idoc.common.util.ObjectUtil;
 import com.github.houbb.idoc.core.constant.JavaTagConstant;
 import com.github.houbb.idoc.core.util.JavaClassUtil;
 import com.github.houbb.idoc.core.util.MetadataDocUtil;
+import com.github.houbb.paradise.common.util.StringUtil;
 import com.thoughtworks.qdox.model.DocletTag;
 import com.thoughtworks.qdox.model.JavaField;
 import com.thoughtworks.qdox.model.Type;
@@ -18,11 +21,25 @@ import java.util.List;
  * @since 0.0.1
  */
 public class MetadataDocFieldHandler extends AbstractHandler<JavaField, DocField> {
+
+    /**
+     * 配置信息
+     */
+    private final DocConfig docConfig;
+
+    public MetadataDocFieldHandler(DocConfig docConfig) {
+        this.docConfig = docConfig;
+    }
+
+
     @Override
     protected DocField doHandle(JavaField javaField) {
         DocField docField = new DocField();
         docField.setName(javaField.getName());
-        docField.setType(javaField.getType().getFullyQualifiedName());
+        final String type = javaField.getType().getFullyQualifiedName();
+        docField.setType(type);
+        final String alias = getTypeAlias(type);
+        docField.setTypeAlias(alias);
         docField.setComment(javaField.getComment());
         // 使用 doclet，缺点：严格的 java-doc 会报错
         // 使用判断的方式，会导致处理其他特别麻烦。
@@ -46,9 +63,22 @@ public class MetadataDocFieldHandler extends AbstractHandler<JavaField, DocField
                 return docField;
             }
 
-            docField.setDocFieldList(MetadataDocUtil.buildDocFieldList(javaFieldList));
+            docField.setDocFieldList(CollectionUtil.buildList(javaFieldList, new MetadataDocFieldHandler(docConfig)));
         }
         return docField;
+    }
+
+    /**
+     * 获取类型别名
+     * @param type 类型
+     * @return 别称
+     */
+    private String getTypeAlias(final String type) {
+        final String alias = docConfig.getTypeAliases().get(type);
+        if(StringUtil.isNotEmpty(alias)) {
+            return alias;
+        }
+        return type;
     }
 
 }

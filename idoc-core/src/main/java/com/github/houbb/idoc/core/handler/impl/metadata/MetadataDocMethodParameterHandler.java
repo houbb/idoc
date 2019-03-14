@@ -1,10 +1,12 @@
 package com.github.houbb.idoc.core.handler.impl.metadata;
 
+import com.github.houbb.idoc.api.model.config.DocConfig;
 import com.github.houbb.idoc.api.model.metadata.DocClass;
 import com.github.houbb.idoc.api.model.metadata.DocMethodParameter;
 import com.github.houbb.idoc.common.handler.AbstractHandler;
 import com.github.houbb.idoc.common.handler.IHandler;
 import com.github.houbb.idoc.common.util.ArrayUtil;
+import com.github.houbb.idoc.common.util.CollectionUtil;
 import com.github.houbb.idoc.core.constant.JavaTagConstant;
 import com.github.houbb.idoc.core.util.JavaClassUtil;
 import com.github.houbb.idoc.core.util.MetadataDocUtil;
@@ -27,8 +29,14 @@ public class MetadataDocMethodParameterHandler extends AbstractHandler<JavaMetho
      */
     private final DocClass docClass;
 
-    public MetadataDocMethodParameterHandler(DocClass docClass) {
+    /**
+     * 配置信息
+     */
+    private final DocConfig docConfig;
+
+    public MetadataDocMethodParameterHandler(DocClass docClass, DocConfig docConfig) {
         this.docClass = docClass;
+        this.docConfig = docConfig;
     }
 
     @Override
@@ -51,7 +59,7 @@ public class MetadataDocMethodParameterHandler extends AbstractHandler<JavaMetho
                 if (needEntryFieldHandle(javaParameter)) {
                     final List<JavaField> javaFieldList = JavaClassUtil
                             .getAllJavaFieldList(javaParameter.getType().getJavaClass());
-                    docMethodParameter.setDocFieldList(MetadataDocUtil.buildDocFieldList(javaFieldList));
+                    docMethodParameter.setDocFieldList(CollectionUtil.buildList(javaFieldList, new MetadataDocFieldHandler(docConfig)));
                 }
                 DocletTag[] docletTags = javaMethod.getTagsByName(JavaTagConstant.PARAM);
                 if (ArrayUtil.isNotEmpty(docletTags)) {

@@ -1,5 +1,7 @@
 package com.github.houbb.idoc.api.model.metadata;
 
+import com.github.houbb.idoc.api.model.config.DocConfig;
+
 import java.util.List;
 
 /**

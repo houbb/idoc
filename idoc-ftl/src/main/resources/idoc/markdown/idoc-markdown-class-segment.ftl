@@ -15,7 +15,7 @@ ${method.remark!"暂无方法备注信息"}
 |:---|:---|:---|:---|:----|
 <#if method.params?? && (method.params?size > 0)>
 <#list method.params as param>
-| ${param.name} | ${param.comment!""} | ${param.type!""} | ${param.require!""} | ${param.remark!""} |
+| ${param.name} | ${param.comment!""} | ${param.typeAlias!""} | ${param.require!""} | ${param.remark!""} |
 </#list>
 <#else>
 暂无入参
@@ -30,7 +30,7 @@ ${method.remark!"暂无方法备注信息"}
 | 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
 |:---|:---|:---|:---|:----|
 <#list method.paramDetails[detailName] as param>
-| ${param.name} | ${param.comment!""} | ${param.type!""} | ${param.require!""} | ${param.remark!""} |
+| ${param.name} | ${param.comment!""} | ${param.typeAlias!""} | ${param.require!""} | ${param.remark!""} |
 </#list>
 </#list>
 <#else>
@@ -59,7 +59,7 @@ ${method.remark!"暂无方法备注信息"}
 | 字段 | 说明 | 字段类型 | 备注 |
 |:---|:---|:---|:---|
 <#list method.returnDetails[detailName] as param>
-| ${param.name} | ${param.comment!""} | ${param.type!""} | ${param.remark!""} |
+| ${param.name} | ${param.comment!""} | ${param.typeAlias!""} | ${param.remark!""} |
 </#list>
 </#list>
 <#else>

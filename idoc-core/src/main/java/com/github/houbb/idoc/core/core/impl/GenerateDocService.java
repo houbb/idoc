@@ -51,7 +51,7 @@ public class GenerateDocService extends AbstractExecuteService {
 
     @Override
     protected IHandler<JavaClass, DocClass> configJavaClassHandler() {
-        IHandler<JavaClass, DocClass> classHandler = new MetadataDocClassHandler();
+        IHandler<JavaClass, DocClass> classHandler = new MetadataDocClassHandler(docConfig);
         log.debug("Initial with java class handler: {}", classHandler.getClass().getName());
         return classHandler;
     }

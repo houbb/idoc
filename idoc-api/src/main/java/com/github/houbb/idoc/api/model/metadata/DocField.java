@@ -24,6 +24,13 @@ public final class DocField extends BaseDoc {
      */
     private List<DocField> docFieldList;
 
+    /**
+     * 字段类型别名
+     * @since 0.1.0
+     */
+    private String typeAlias;
+
+
     public String getType() {
         return type;
     }
@@ -48,4 +55,11 @@ public final class DocField extends BaseDoc {
         this.docFieldList = docFieldList;
     }
 
+    public String getTypeAlias() {
+        return typeAlias;
+    }
+
+    public void setTypeAlias(String typeAlias) {
+        this.typeAlias = typeAlias;
+    }
 }

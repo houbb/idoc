@@ -1,9 +1,9 @@
 package com.github.houbb.idoc.core.handler.impl.metadata;
 
+import com.github.houbb.idoc.api.model.config.DocConfig;
 import com.github.houbb.idoc.api.model.metadata.DocClass;
 import com.github.houbb.idoc.api.model.metadata.DocMethodReturn;
 import com.github.houbb.idoc.common.handler.AbstractHandler;
-import com.github.houbb.idoc.common.handler.IHandler;
 import com.github.houbb.idoc.common.util.ObjectUtil;
 import com.github.houbb.idoc.core.constant.JavaTagConstant;
 import com.thoughtworks.qdox.model.DocletTag;
@@ -23,8 +23,14 @@ public class MetadataDocReturnClassHandler extends AbstractHandler<JavaMethod, D
      */
     private final DocClass docClass;
 
-    public MetadataDocReturnClassHandler(DocClass docClass) {
+    /**
+     * 配置信息
+     */
+    private final DocConfig docConfig;
+
+    public MetadataDocReturnClassHandler(DocClass docClass, DocConfig docConfig) {
         this.docClass = docClass;
+        this.docConfig = docConfig;
     }
 
     @Override
@@ -49,7 +55,7 @@ public class MetadataDocReturnClassHandler extends AbstractHandler<JavaMethod, D
             // 对象属性赋值,直接将 doclass 信息设置过来
             fillDocMethodReturn(docMethodReturn, docClass);
         } else {
-            DocClass docClass = new MetadataDocClassHandler().handle(returnClass);
+            DocClass docClass = new MetadataDocClassHandler(docConfig).handle(returnClass);
             fillDocMethodReturn(docMethodReturn, docClass);
         }
 

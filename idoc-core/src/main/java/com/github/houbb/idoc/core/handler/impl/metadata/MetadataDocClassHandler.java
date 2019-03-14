@@ -1,8 +1,11 @@
 package com.github.houbb.idoc.core.handler.impl.metadata;
 
+import com.github.houbb.idoc.api.model.config.DocConfig;
 import com.github.houbb.idoc.api.model.metadata.DocClass;
+import com.github.houbb.idoc.api.model.metadata.DocField;
 import com.github.houbb.idoc.common.handler.AbstractHandler;
 import com.github.houbb.idoc.common.util.ArrayUtil;
+import com.github.houbb.idoc.common.util.CollectionUtil;
 import com.github.houbb.idoc.core.util.JavaClassUtil;
 import com.github.houbb.idoc.core.util.MetadataDocUtil;
 import com.github.houbb.log.integration.core.Log;
@@ -23,6 +26,15 @@ public class MetadataDocClassHandler extends AbstractHandler<JavaClass, DocClass
      */
     private static final Log log = LogFactory.getLog(MetadataDocClassHandler.class);
 
+
+    /**
+     * 配置信息
+     */
+    private final DocConfig docConfig;
+
+    public MetadataDocClassHandler(DocConfig docConfig) {
+        this.docConfig = docConfig;
+    }
 
     @Override
     protected DocClass doHandle(JavaClass javaClass) {
@@ -51,13 +63,21 @@ public class MetadataDocClassHandler extends AbstractHandler<JavaClass, DocClass
 
         // 字段信息
         final List<JavaField> javaFieldList = JavaClassUtil.getAllJavaFieldList(javaClass);
-        docClass.setDocFieldList(MetadataDocUtil.buildDocFieldList(javaFieldList));
+        docClass.setDocFieldList(CollectionUtil.buildList(javaFieldList, new MetadataDocFieldHandler(docConfig)));
 
         // 方法信息
         final JavaMethod[] javaMethods = javaClass.getMethods();
-        docClass.setDocMethodList(ArrayUtil.buildList(javaMethods, new MetadataDocMethodHandler(docClass)));
+        docClass.setDocMethodList(ArrayUtil.buildList(javaMethods, new MetadataDocMethodHandler(docClass, docConfig)));
 
         return docClass;
     }
 
+    /**
+     * 构建字段列表
+     * @param javaFields 字段
+     * @return 结果
+     */
+    public List<DocField> buildDocFieldList(final List<JavaField> javaFields) {
+        return CollectionUtil.buildList(javaFields, new MetadataDocFieldHandler(docConfig));
+    }
 }

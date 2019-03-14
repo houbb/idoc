@@ -42,24 +42,6 @@ public final class MetadataDocUtil {
         return ArrayUtil.buildList(annotations, new MetadataDocAnnotationHandler());
     }
 
-    /**
-     * 构建字段列表
-     * @param javaFields 字段
-     * @return 结果
-     */
-    public static List<DocField> buildDocFieldList(final JavaField[] javaFields) {
-        return ArrayUtil.buildList(javaFields, new MetadataDocFieldHandler());
-    }
-
-    /**
-     * 构建字段列表
-     * @param javaFields 字段
-     * @return 结果
-     */
-    public static List<DocField> buildDocFieldList(final List<JavaField> javaFields) {
-        return CollectionUtil.buildList(javaFields, new MetadataDocFieldHandler());
-    }
-
     private MetadataDocUtil(){}
 
 }
