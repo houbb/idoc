@@ -1,10 +1,14 @@
 package com.github.houbb.idoc.core.mojo;
 
+import com.github.houbb.idoc.api.model.common.DocOption;
 import com.github.houbb.idoc.api.model.config.DocConfig;
+import com.github.houbb.idoc.common.util.ArrayUtil;
 import com.github.houbb.idoc.core.core.impl.AbstractExecuteService;
 import com.github.houbb.idoc.core.core.impl.GenerateDocService;
+import com.github.houbb.idoc.core.util.JavaTypeAliasUtil;
 import com.github.houbb.log.integration.core.Log;
 import com.github.houbb.log.integration.core.LogFactory;
+
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -12,6 +16,9 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.settings.Settings;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * mvn 插件核心类
@@ -87,6 +94,14 @@ public class GenerateDocMojo extends AbstractMojo {
      */
     @Parameter(property = "generateFilters", required = false)
     private String[] generateFilters;
+
+    /**
+     * 最后生成文档的包含过滤器
+     * 1. 不指定默认所有的类都生成到文档
+     * 2. 指定之后，只有符合过滤器条件的类才会被生成到文档中。
+     */
+    @Parameter(property = "typeAliases", required = false)
+    private DocOption[] typeAliases;
     //endregion
 
 
@@ -100,6 +115,7 @@ public class GenerateDocMojo extends AbstractMojo {
         log.info("------------------------------------ Start generate doc");
 
         DocConfig docConfig = buildDocConfig();
+        log.info("Generate doc with config：" + docConfig);
         AbstractExecuteService executeService = new GenerateDocService(project, docConfig);
         try {
             executeService.setExcludes(excludes).setIncludes(includes);
@@ -122,7 +138,29 @@ public class GenerateDocMojo extends AbstractMojo {
         docConfig.setOverwriteWhenExists(isOverwriteWhenExists);
         docConfig.setGenerates(generates);
         docConfig.setGenerateFilters(generateFilters);
+        docConfig.setTypeAliases(initTypeAliases());
         return docConfig;
+    }
+
+    /**
+     * 初始化类型别名信息
+     * @return map 信息
+     */
+    private Map<String, String> initTypeAliases() {
+        Map<String, String> map = new HashMap<>();
+        // 默认配置信息
+        Map<String, String> aliasMap = JavaTypeAliasUtil.getTypeAliasMap();
+        for(Map.Entry<String, String> entry : aliasMap.entrySet()) {
+            map.put(entry.getKey(), entry.getValue());
+        }
+
+        // 用户自定义信息
+        if(ArrayUtil.isNotEmpty(typeAliases)) {
+            for(DocOption docOption : typeAliases) {
+                map.put(docOption.getKey(), docOption.getValue());
+            }
+        }
+        return map;
     }
 
 

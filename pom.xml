@@ -7,7 +7,7 @@
     <groupId>com.github.houbb</groupId>
     <artifactId>idoc</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.2</version>
+    <version>0.1.0-SNAPSHOT</version>
 
     <modules>
         <module>idoc-api</module>
@@ -244,6 +244,12 @@
                 <version>${plugin.maven-javadoc-plugin.version}</version>
             </plugin>
 
+            <!--resource-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+            </plugin>
         </plugins>
     </build>
 

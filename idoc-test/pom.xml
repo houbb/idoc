@@ -5,7 +5,7 @@
     <parent>
         <artifactId>idoc</artifactId>
         <groupId>com.github.houbb</groupId>
-        <version>0.0.2</version>
+        <version>0.1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -32,23 +32,16 @@
             <plugin>
                 <groupId>com.github.houbb</groupId>
                 <artifactId>idoc-core</artifactId>
-                <version>0.0.2</version>
+                <version>${project.version}</version>
                 <configuration>
                     <isAllInOne>true</isAllInOne>
-                    <generates>
-                        <generate>com.github.houbb.idoc.ftl.api.generator.MarkdownDocGenerator</generate>
-                    </generates>
-                    <generateFilters>
-                        <generateFilter>com.github.houbb.idoc.test.filter.MyGenerateFilter</generateFilter>
-                    </generateFilters>
+                    <typeAliases>
+                        <typeAlias>
+                            <key>java.lang.String</key>
+                            <value>String自定义说明</value>
+                        </typeAlias>
+                    </typeAliases>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.github.houbb</groupId>
-                        <artifactId>idoc-test</artifactId>
-                        <version>${project.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
         </plugins>
     </build>

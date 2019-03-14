@@ -1,5 +1,8 @@
 package com.github.houbb.idoc.api.model.config;
 
+import java.util.Arrays;
+import java.util.Map;
+
 /**
  * 文档生成配置信息
  * @author binbin.hou
@@ -31,6 +34,12 @@ public class DocConfig {
      * 过滤器列表
      */
     private String[] generateFilters;
+
+    /**
+     * 类型别称
+     * @since 0.1.0
+     */
+    private Map<String, String> typeAliases;
 
     public boolean isOverwriteWhenExists() {
         return isOverwriteWhenExists;
@@ -70,5 +79,25 @@ public class DocConfig {
 
     public void setGenerateFilters(String[] generateFilters) {
         this.generateFilters = generateFilters;
+    }
+
+    public Map<String, String> getTypeAliases() {
+        return typeAliases;
+    }
+
+    public void setTypeAliases(Map<String, String> typeAliases) {
+        this.typeAliases = typeAliases;
+    }
+
+    @Override
+    public String toString() {
+        return "DocConfig{" +
+                "isOverwriteWhenExists=" + isOverwriteWhenExists +
+                ", isAllInOne=" + isAllInOne +
+                ", encoding='" + encoding + '\'' +
+                ", generates=" + Arrays.toString(generates) +
+                ", generateFilters=" + Arrays.toString(generateFilters) +
+                ", typeAliases=" + typeAliases +
+                '}';
     }
 }
