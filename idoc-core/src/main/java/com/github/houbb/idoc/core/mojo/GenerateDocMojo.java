@@ -8,7 +8,6 @@ import com.github.houbb.idoc.core.core.impl.GenerateDocService;
 import com.github.houbb.idoc.core.util.JavaTypeAliasUtil;
 import com.github.houbb.log.integration.core.Log;
 import com.github.houbb.log.integration.core.LogFactory;
-
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -17,6 +16,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.settings.Settings;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -147,21 +147,18 @@ public class GenerateDocMojo extends AbstractMojo {
      * @return map 信息
      */
     private Map<String, String> initTypeAliases() {
-        Map<String, String> map = new HashMap<>();
-        // 默认配置信息
-        Map<String, String> aliasMap = JavaTypeAliasUtil.getTypeAliasMap();
-        for(Map.Entry<String, String> entry : aliasMap.entrySet()) {
-            map.put(entry.getKey(), entry.getValue());
-        }
+        Map<String, String> defaultAliasMap = JavaTypeAliasUtil.getTypeAliasMap();
+
+        // 系统默认
+        Map<String, String> aliasMap = new HashMap<>(defaultAliasMap);
 
         // 用户自定义信息
         if(ArrayUtil.isNotEmpty(typeAliases)) {
             for(DocOption docOption : typeAliases) {
-                map.put(docOption.getKey(), docOption.getValue());
+                aliasMap.put(docOption.getKey(), docOption.getValue());
             }
         }
-        return map;
+        return aliasMap;
     }
-
 
 }

@@ -59,4 +59,16 @@
             <artifactId>fastjson</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <!--resource-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
