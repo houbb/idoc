@@ -18,6 +18,10 @@
 
 - 支持用户自定生成文档的类过滤器
 
+## 新特性
+
+- 添加字段类型别名，支持用户自定义
+
 # 变更日志
 
 > [变更日志](doc/CHANGELOG.md)
@@ -40,7 +44,7 @@ maven 3.x+
         <plugin>
             <groupId>com.github.houbb</groupId>
             <artifactId>idoc-core</artifactId>
-            <version>0.0.2</version>
+            <version>0.1.0</version>
         </plugin>
     </plugins>
 </build>
@@ -119,3 +123,5 @@ mvn com.github.houbb:idoc-core:0.0.2:idoc
 [02-插件的参数配置](/doc/blog/文档生成-02-插件的参数配置.md)
 
 [03-自定义生成文件过滤器](/doc/blog/文档生成-03-自定义生成文件过滤器.md)
+
+[04-字段类型别名支持](/doc/blog/文档生成-04-字段类型别名支持.md)

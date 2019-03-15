@@ -15,6 +15,12 @@ public final class DocMethodParameter extends BaseDoc {
     private String type;
 
     /**
+     * 参数类型别名
+     * @since 0.1.0
+     */
+    private String typeAlias;
+
+    /**
      * 当前入参下面的字段信息
      */
     private List<DocField> docFieldList;
@@ -35,4 +41,11 @@ public final class DocMethodParameter extends BaseDoc {
         this.docFieldList = docFieldList;
     }
 
+    public String getTypeAlias() {
+        return typeAlias;
+    }
+
+    public void setTypeAlias(String typeAlias) {
+        this.typeAlias = typeAlias;
+    }
 }

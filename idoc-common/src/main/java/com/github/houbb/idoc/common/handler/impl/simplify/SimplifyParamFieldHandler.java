@@ -26,6 +26,7 @@ public class SimplifyParamFieldHandler implements IHandler<DocMethodParameter, S
         simplifyDocField.setComment(docMethodParameter.getComment());
         simplifyDocField.setRemark(docMethodParameter.getRemark());
         simplifyDocField.setType(docMethodParameter.getType());
+        simplifyDocField.setTypeAlias(docMethodParameter.getTypeAlias());
 
         // 入参为特殊参数列表
         List<DocField> docFieldList =  docMethodParameter.getDocFieldList();

@@ -45,6 +45,7 @@ public class MetadataDocClassHandler extends AbstractHandler<JavaClass, DocClass
         docClass.setFullName(javaClass.getFullyQualifiedName());
 
         // java 默认的字段
+        // TODO: 这里直接 return 应该是为了避免死循环和额外处理
         if (JavaClassUtil.isPrimitiveOrJdk(javaClass.asType())) {
             return docClass;
         }

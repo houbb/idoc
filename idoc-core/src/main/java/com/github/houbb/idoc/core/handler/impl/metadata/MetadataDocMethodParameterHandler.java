@@ -14,6 +14,7 @@ import com.thoughtworks.qdox.model.DocletTag;
 import com.thoughtworks.qdox.model.JavaField;
 import com.thoughtworks.qdox.model.JavaMethod;
 import com.thoughtworks.qdox.model.JavaParameter;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
@@ -50,7 +51,10 @@ public class MetadataDocMethodParameterHandler extends AbstractHandler<JavaMetho
                 docMethodParameter.setName(paramName);
                 docMethodParameter.setDocAnnotationList(MetadataDocUtil
                         .buildDocAnnotationList(javaParameter.getAnnotations()));
-                docMethodParameter.setType(javaParameter.getType().getFullyQualifiedName());
+                final String type = javaParameter.getType().getFullyQualifiedName();
+                final String typeAlias = StringUtils.defaultIfEmpty(docConfig.getTypeAliases().get(type), type);
+                docMethodParameter.setType(type);
+                docMethodParameter.setTypeAlias(typeAlias);
                 // 基础类型和非基础类型
                 // 初期版本可以做的比较简单，固定写死常见字段类型。
                 // 8大基本类型+Number 类型。

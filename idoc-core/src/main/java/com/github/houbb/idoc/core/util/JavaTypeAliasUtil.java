@@ -52,6 +52,7 @@ public final class JavaTypeAliasUtil {
 
         TYPE_ALIAS_MAP.put("java.util.Collection", "集合");
         TYPE_ALIAS_MAP.put("java.util.List", "列表");
+        TYPE_ALIAS_MAP.put("java.util.Map", "映射");
     }
 
     /**

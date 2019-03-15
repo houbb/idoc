@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 用户信息
+ * 类型别名测试对象
  * @author binbin.hou
- * @since 0.0.1
+ * @since 0.1.0
  */
 public class TypeAliasBean {
 
@@ -46,7 +46,10 @@ public class TypeAliasBean {
 
     private List<String> stringList;
 
-    private String[] strings;
+    /**
+     * TODO: 数组的类型为什么是 String
+     */
+    private String[] stringArray;
 
     private Collection<String> stringCollection;
 
@@ -188,12 +191,12 @@ public class TypeAliasBean {
         this.stringList = stringList;
     }
 
-    public String[] getStrings() {
-        return strings;
+    public String[] getStringArray() {
+        return stringArray;
     }
 
-    public void setStrings(String[] strings) {
-        this.strings = strings;
+    public void setStringArray(String[] stringArray) {
+        this.stringArray = stringArray;
     }
 
     public Collection<String> getStringCollection() {

@@ -34,6 +34,9 @@
                 <artifactId>idoc-core</artifactId>
                 <version>${project.version}</version>
                 <configuration>
+                    <generateFilters>
+                        <generateFilter>com.github.houbb.idoc.test.filter.MyGenerateAliasFilter</generateFilter>
+                    </generateFilters>
                     <isAllInOne>true</isAllInOne>
                     <typeAliases>
                         <typeAlias>
@@ -42,6 +45,13 @@
                         </typeAlias>
                     </typeAliases>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.github.houbb</groupId>
+                        <artifactId>idoc-test</artifactId>
+                        <version>${project.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>

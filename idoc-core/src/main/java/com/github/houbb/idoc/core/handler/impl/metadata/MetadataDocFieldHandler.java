@@ -12,6 +12,7 @@ import com.github.houbb.paradise.common.util.StringUtil;
 import com.thoughtworks.qdox.model.DocletTag;
 import com.thoughtworks.qdox.model.JavaField;
 import com.thoughtworks.qdox.model.Type;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class MetadataDocFieldHandler extends AbstractHandler<JavaField, DocField
         docField.setName(javaField.getName());
         final String type = javaField.getType().getFullyQualifiedName();
         docField.setType(type);
-        final String alias = getTypeAlias(type);
+        final String alias = StringUtils.defaultIfEmpty(docConfig.getTypeAliases().get(type), type);
         docField.setTypeAlias(alias);
         docField.setComment(javaField.getComment());
         // 使用 doclet，缺点：严格的 java-doc 会报错
@@ -66,19 +67,6 @@ public class MetadataDocFieldHandler extends AbstractHandler<JavaField, DocField
             docField.setDocFieldList(CollectionUtil.buildList(javaFieldList, new MetadataDocFieldHandler(docConfig)));
         }
         return docField;
-    }
-
-    /**
-     * 获取类型别名
-     * @param type 类型
-     * @return 别称
-     */
-    private String getTypeAlias(final String type) {
-        final String alias = docConfig.getTypeAliases().get(type);
-        if(StringUtil.isNotEmpty(alias)) {
-            return alias;
-        }
-        return type;
     }
 
 }
