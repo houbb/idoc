@@ -1,15 +1,15 @@
 <#if class??>
-# ${class.name}-${class.comment!""}
+## ${class.name}-${class.comment!""}
 
-${class.remark!"暂无类备注信息"}
+${class.remark!class.comment!""}
 
 <#if class.methods??>
 <#list class.methods as method>
-## ${method.name}-${method.comment!""}
+### ${method.name}-${method.comment!""}
 
-${method.remark!"暂无方法备注信息"}
+${method.remark!method.comment!""}
 
-### 方法入参
+#### 方法入参
 
 | 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
 |:---|:---|:---|:---|:----|
@@ -21,7 +21,7 @@ ${method.remark!"暂无方法备注信息"}
 暂无入参
 </#if>
 
-#### 方法入参详情
+##### 方法入参详情
 <#if method.paramDetails?? && (method.paramDetails?size > 0)>
 <#list method.paramDetails?keys as detailName>
 
@@ -37,19 +37,19 @@ ${method.remark!"暂无方法备注信息"}
 暂无入参详情
 </#if>
 
-### 方法出参
+#### 方法出参
 
 | 字段 | 说明 | 字段类型 | 备注 |
 |:---|:---|:---|:---|
 <#if method.returns?? && (method.returns?size > 0)>
 <#list method.returns as return>
-| ${return.name} | ${return.comment!""} | ${return.type!""} |  ${return.remark!""} |
+| ${return.name} | ${return.comment!""} | ${return.typeAlias!""} |  ${return.remark!""} |
 </#list>
 <#else>
 暂无出参
 </#if>
 
-#### 方法出参详情
+##### 方法出参详情
 
 <#if method.returnDetails?? && (method.returnDetails?size > 0)>
 <#list method.returnDetails?keys as detailName>
@@ -63,7 +63,7 @@ ${method.remark!"暂无方法备注信息"}
 </#list>
 </#list>
 <#else>
-暂无入参详情
+暂无出参详情
 </#if>
 
 </#list>

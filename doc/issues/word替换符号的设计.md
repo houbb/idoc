@@ -18,3 +18,13 @@
 2. 替换掉其中的列表等处理信息(使用FTL的处理方式)
 
 3. 设置好替换后的文本内容。
+
+# 类型转换的问题
+
+专业的事情应该交给专业的人来做。
+
+统一使用 pandoc 来实现。
+
+https://github.com/jgm/pandoc/releases/tag/2.2.3.2
+
+word 可以使用 wirteage

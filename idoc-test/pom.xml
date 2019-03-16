@@ -34,14 +34,17 @@
                 <artifactId>idoc-core</artifactId>
                 <version>${project.version}</version>
                 <configuration>
+                    <generates>
+                        <generate>com.github.houbb.idoc.ftl.api.generator.MarkdownDocGenerator</generate>
+                    </generates>
                     <generateFilters>
-                        <generateFilter>com.github.houbb.idoc.test.filter.MyGenerateAliasFilter</generateFilter>
+                        <generateFilter>com.github.houbb.idoc.test.filter.MyGenerateFilter</generateFilter>
                     </generateFilters>
                     <isAllInOne>true</isAllInOne>
                     <typeAliases>
                         <typeAlias>
                             <key>java.lang.String</key>
-                            <value>String自定义说明</value>
+                            <value>字符串</value>
                         </typeAlias>
                     </typeAliases>
                 </configuration>
