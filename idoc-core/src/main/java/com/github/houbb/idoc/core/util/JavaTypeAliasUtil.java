@@ -1,5 +1,8 @@
 package com.github.houbb.idoc.core.util;
 
+import com.thoughtworks.qdox.model.Type;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -53,6 +56,15 @@ public final class JavaTypeAliasUtil {
         TYPE_ALIAS_MAP.put("java.util.Collection", "集合");
         TYPE_ALIAS_MAP.put("java.util.List", "列表");
         TYPE_ALIAS_MAP.put("java.util.Map", "映射");
+
+        /**
+         * 针对数组类型
+         */
+        TYPE_ALIAS_MAP.put("array", "数组");
+        /**
+         * 空类型
+         */
+        TYPE_ALIAS_MAP.put("void", "空");
     }
 
     /**
@@ -61,6 +73,31 @@ public final class JavaTypeAliasUtil {
      */
     public static Map<String, String> getTypeAliasMap() {
         return Collections.unmodifiableMap(TYPE_ALIAS_MAP);
+    }
+
+    /**
+     * 获取别名
+     * 1. 如果对应的别名不存在，则使用原始的 {@link Type#getFullyQualifiedName()}
+     * 2. 如果是数组，全称获取到的是其中的类型。这个需要注意一下。
+     * @param aliasMap 别名集合
+     * @param type 类型
+     * @return 别名
+     */
+    public static String getAliasName(final Map<String, String> aliasMap, final Type type) {
+        if(type.isArray()) {
+            // 数组类型
+            return aliasMap.get("array");
+        } else if(type.isVoid()) {
+            // 空类型
+            return aliasMap.get("void");
+        } else {
+            final String fullName = type.getFullyQualifiedName();
+            String alias = aliasMap.get(fullName);
+            if(StringUtils.isNotEmpty(alias)) {
+                return alias;
+            }
+            return fullName;
+        }
     }
 
 }

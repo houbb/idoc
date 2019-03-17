@@ -38,7 +38,7 @@
                         <generate>com.github.houbb.idoc.ftl.api.generator.MarkdownDocGenerator</generate>
                     </generates>
                     <generateFilters>
-                        <generateFilter>com.github.houbb.idoc.test.filter.MyGenerateFilter</generateFilter>
+                        <generateFilter>com.github.houbb.idoc.test.filter.MyGenerateAliasFilter</generateFilter>
                     </generateFilters>
                     <isAllInOne>true</isAllInOne>
                     <typeAliases>

@@ -9,6 +9,7 @@ import com.github.houbb.idoc.common.util.ArrayUtil;
 import com.github.houbb.idoc.common.util.CollectionUtil;
 import com.github.houbb.idoc.core.constant.JavaTagConstant;
 import com.github.houbb.idoc.core.util.JavaClassUtil;
+import com.github.houbb.idoc.core.util.JavaTypeAliasUtil;
 import com.github.houbb.idoc.core.util.MetadataDocUtil;
 import com.thoughtworks.qdox.model.DocletTag;
 import com.thoughtworks.qdox.model.JavaField;
@@ -52,7 +53,7 @@ public class MetadataDocMethodParameterHandler extends AbstractHandler<JavaMetho
                 docMethodParameter.setDocAnnotationList(MetadataDocUtil
                         .buildDocAnnotationList(javaParameter.getAnnotations()));
                 final String type = javaParameter.getType().getFullyQualifiedName();
-                final String typeAlias = StringUtils.defaultIfEmpty(docConfig.getTypeAliases().get(type), type);
+                final String typeAlias = JavaTypeAliasUtil.getAliasName(docConfig.getTypeAliases(), javaParameter.getType());
                 docMethodParameter.setType(type);
                 docMethodParameter.setTypeAlias(typeAlias);
                 // 基础类型和非基础类型

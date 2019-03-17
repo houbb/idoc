@@ -7,6 +7,7 @@ import com.github.houbb.idoc.common.util.CollectionUtil;
 import com.github.houbb.idoc.common.util.ObjectUtil;
 import com.github.houbb.idoc.core.constant.JavaTagConstant;
 import com.github.houbb.idoc.core.util.JavaClassUtil;
+import com.github.houbb.idoc.core.util.JavaTypeAliasUtil;
 import com.github.houbb.idoc.core.util.MetadataDocUtil;
 import com.github.houbb.paradise.common.util.StringUtil;
 import com.thoughtworks.qdox.model.DocletTag;
@@ -39,7 +40,7 @@ public class MetadataDocFieldHandler extends AbstractHandler<JavaField, DocField
         docField.setName(javaField.getName());
         final String type = javaField.getType().getFullyQualifiedName();
         docField.setType(type);
-        final String alias = StringUtils.defaultIfEmpty(docConfig.getTypeAliases().get(type), type);
+        final String alias = JavaTypeAliasUtil.getAliasName(docConfig.getTypeAliases(), javaField.getType());
         docField.setTypeAlias(alias);
         docField.setComment(javaField.getComment());
         // 使用 doclet，缺点：严格的 java-doc 会报错
