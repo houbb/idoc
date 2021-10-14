@@ -18,7 +18,7 @@ public class SimplifyDocMethod extends SimplifyDocBase {
     /**
      * 方法出参
      */
-    private List<SimplifyDocField> returns;
+    private SimplifyDocReturn returns;
 
     /**
      * 存放参数详情
@@ -38,11 +38,11 @@ public class SimplifyDocMethod extends SimplifyDocBase {
         this.params = params;
     }
 
-    public List<SimplifyDocField> getReturns() {
+    public SimplifyDocReturn getReturns() {
         return returns;
     }
 
-    public void setReturns(List<SimplifyDocField> returns) {
+    public void setReturns(SimplifyDocReturn returns) {
         this.returns = returns;
     }
 

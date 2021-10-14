@@ -12,7 +12,7 @@ public class MyGenerateAliasFilter implements IDocGenerateFilter {
 
     @Override
     public boolean include(DocClass docClass) {
-        if("TypeAliasSimpleBean".equalsIgnoreCase(docClass.getName())) {
+        if("IdUtil".equalsIgnoreCase(docClass.getName())) {
             return true;
         }
         return false;
