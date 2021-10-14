@@ -44,7 +44,7 @@ maven 3.x+
         <plugin>
             <groupId>com.github.houbb</groupId>
             <artifactId>idoc-core</artifactId>
-            <version>0.1.0</version>
+            <version>0.2.0</version>
         </plugin>
     </plugins>
 </build>
@@ -96,7 +96,7 @@ public class Address {
 ## 执行插件
 
 ```
-mvn com.github.houbb:idoc-core:0.0.2:idoc
+mvn com.github.houbb:idoc-core:0.2.0:idoc
 ```
 
 ## 命令行日志信息
@@ -125,3 +125,29 @@ mvn com.github.houbb:idoc-core:0.0.2:idoc
 [03-自定义生成文件过滤器](/doc/blog/文档生成-03-自定义生成文件过滤器.md)
 
 [04-字段类型别名支持](/doc/blog/文档生成-04-字段类型别名支持.md)
+
+# ROAD-MAP
+
+- [ ] 指定输出路径
+
+- [ ] 更多的文档格式
+
+md
+html
+pdf
+excel
+word
+
+- [ ] 版本管理
+
+不同版本之间的对比
+
+- [x] 添加索引文件
+
+当为多个文件时
+
+- [x] 优化参数显示
+
+如果没有，则直接显示无
+
+

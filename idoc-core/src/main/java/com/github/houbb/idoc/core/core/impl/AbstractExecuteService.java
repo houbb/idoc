@@ -1,6 +1,7 @@
 package com.github.houbb.idoc.core.core.impl;
 
 
+import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.idoc.api.model.metadata.DocClass;
 import com.github.houbb.idoc.common.exception.IDocRuntimeException;
 import com.github.houbb.idoc.common.handler.IHandler;
@@ -9,7 +10,6 @@ import com.github.houbb.idoc.core.core.ExecuteService;
 import com.github.houbb.idoc.core.util.JavaClassUtil;
 import com.github.houbb.log.integration.core.Log;
 import com.github.houbb.log.integration.core.LogFactory;
-import com.github.houbb.paradise.common.util.ArrayUtil;
 import com.thoughtworks.qdox.model.JavaClass;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;

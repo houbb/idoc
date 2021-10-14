@@ -8,12 +8,9 @@ import com.github.houbb.idoc.common.util.ObjectUtil;
 import com.github.houbb.idoc.core.constant.JavaTagConstant;
 import com.github.houbb.idoc.core.util.JavaClassUtil;
 import com.github.houbb.idoc.core.util.JavaTypeAliasUtil;
-import com.github.houbb.idoc.core.util.MetadataDocUtil;
-import com.github.houbb.paradise.common.util.StringUtil;
 import com.thoughtworks.qdox.model.DocletTag;
 import com.thoughtworks.qdox.model.JavaField;
 import com.thoughtworks.qdox.model.Type;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 

@@ -18,6 +18,12 @@ public class SimplifyDocClass extends SimplifyDocBase {
      */
     private List<SimplifyDocMethod> methods;
 
+    /**
+     * 文档路径
+     * @since 0.2.0
+     */
+    private String docPath;
+
     public String getPackageName() {
         return packageName;
     }
@@ -33,4 +39,13 @@ public class SimplifyDocClass extends SimplifyDocBase {
     public void setMethods(List<SimplifyDocMethod> methods) {
         this.methods = methods;
     }
+
+    public String getDocPath() {
+        return docPath;
+    }
+
+    public void setDocPath(String docPath) {
+        this.docPath = docPath;
+    }
+
 }

@@ -76,7 +76,7 @@ public class GenerateDocMojo extends AbstractMojo {
     /**
      * 是否所有的信息生成在一个文件
      */
-    @Parameter ( property = "isAllInOne", defaultValue = "true")
+    @Parameter ( property = "isAllInOne", defaultValue = "false")
     private boolean isAllInOne;
 
     /**

@@ -123,4 +123,11 @@ public class DocClass extends BaseDoc {
         this.parentClass = parentClass;
     }
 
+    public DocPackage getDocPackage() {
+        return docPackage;
+    }
+
+    public void setDocPackage(DocPackage docPackage) {
+        this.docPackage = docPackage;
+    }
 }

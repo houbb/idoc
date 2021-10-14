@@ -1,19 +1,19 @@
 <#if class??>
-## ${class.name}-${class.comment!""}
+## ${class.name}-${class.commentFirstLine!"暂无说明"}
 
-${class.remark!class.comment!""}
+${class.remark!class.comment!"暂无说明"}
 
 <#if class.methods??>
 <#list class.methods as method>
-### ${method.name}-${method.comment!""}
+### ${method.name}-${method.commentFirstLine!"暂无说明"}
 
-${method.remark!method.comment!""}
+${method.remark!method.comment!"暂无说明"}
 
 #### 方法入参
 
+<#if method.params?? && (method.params?size > 0)>
 | 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
 |:---|:---|:---|:---|:----|
-<#if method.params?? && (method.params?size > 0)>
 <#list method.params as param>
 | ${param.name} | ${param.comment!""} | ${param.typeAlias!""} | ${param.require!""} | ${param.remark!""} |
 </#list>
@@ -22,6 +22,7 @@ ${method.remark!method.comment!""}
 </#if>
 
 ##### 方法入参详情
+
 <#if method.paramDetails?? && (method.paramDetails?size > 0)>
 <#list method.paramDetails?keys as detailName>
 
@@ -39,9 +40,9 @@ ${method.remark!method.comment!""}
 
 #### 方法出参
 
+<#if method.returns?? && (method.returns?size > 0)>
 | 字段 | 说明 | 字段类型 | 备注 |
 |:---|:---|:---|:---|
-<#if method.returns?? && (method.returns?size > 0)>
 <#list method.returns as return>
 | ${return.name} | ${return.comment!""} | ${return.typeAlias!""} |  ${return.remark!""} |
 </#list>

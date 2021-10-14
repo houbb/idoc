@@ -1,6 +1,7 @@
 package com.github.houbb.idoc.common.util;
 
-import com.github.houbb.paradise.common.util.StringUtil;
+
+import com.github.houbb.heaven.util.lang.StringUtil;
 
 /**
  * doc 类工具类

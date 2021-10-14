@@ -8,6 +8,7 @@ import com.github.houbb.idoc.common.handler.IHandler;
 import com.github.houbb.idoc.common.model.SimplifyDocField;
 import com.github.houbb.idoc.common.model.SimplifyDocMethod;
 import com.github.houbb.idoc.common.util.CollectionUtil;
+import com.github.houbb.idoc.common.util.CommentUtil;
 import com.github.houbb.idoc.common.util.ObjectUtil;
 
 import java.util.Collections;
@@ -31,6 +32,10 @@ public class SimplifyMethodHandler implements IHandler<DocMethod, SimplifyDocMet
         commonDocMethod.setComment(docMethod.getComment());
         commonDocMethod.setRemark(docMethod.getRemark());
         commonDocMethod.setName(docMethod.getName());
+
+        //v0.2.0 添加第一行备注，避免过多，导致格式错乱
+        String commentFirstLine = CommentUtil.getFirstLine(commonDocMethod.getComment());
+        commonDocMethod.setCommentFirstLine(commentFirstLine);
 
         // 处理入参
         final List<SimplifyDocField> params = buildParams(docMethod.getDocMethodParameterList());

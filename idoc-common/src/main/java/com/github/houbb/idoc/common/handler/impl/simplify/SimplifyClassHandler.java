@@ -6,6 +6,7 @@ import com.github.houbb.idoc.common.handler.IHandler;
 import com.github.houbb.idoc.common.model.SimplifyDocClass;
 import com.github.houbb.idoc.common.model.SimplifyDocMethod;
 import com.github.houbb.idoc.common.util.CollectionUtil;
+import com.github.houbb.idoc.common.util.CommentUtil;
 
 import java.util.List;
 
@@ -22,6 +23,10 @@ public class SimplifyClassHandler implements IHandler<DocClass, SimplifyDocClass
         simplifyDocClass.setPackageName(docClass.getPackageName());
         simplifyDocClass.setComment(docClass.getComment());
         simplifyDocClass.setRemark(docClass.getRemark());
+
+        //v0.2.0 添加第一行备注，避免过多，导致格式错乱
+        String commentFirstLine = CommentUtil.getFirstLine(docClass.getComment());
+        simplifyDocClass.setCommentFirstLine(commentFirstLine);
 
         // 方法信息
         List<DocMethod> docMethodList = docClass.getDocMethodList();

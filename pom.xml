@@ -7,7 +7,7 @@
     <groupId>com.github.houbb</groupId>
     <artifactId>idoc</artifactId>
     <packaging>pom</packaging>
-    <version>0.1.0</version>
+    <version>0.2.0-SNAPSHOT</version>
 
     <modules>
         <module>idoc-api</module>
@@ -34,8 +34,8 @@
         <project.compiler.level>1.8</project.compiler.level>
 
         <!--============================== INTER ==============================-->
-        <log-integration.version>1.1.2</log-integration.version>
-        <paradise.version>1.1.1</paradise.version>
+        <log-integration.version>1.1.8</log-integration.version>
+        <heaven.version>0.1.144</heaven.version>
 
         <!--============================== INTER ==============================-->
         <maven-plugin-api.version>3.0</maven-plugin-api.version>
@@ -84,8 +84,8 @@
             </dependency>
             <dependency>
                 <groupId>com.github.houbb</groupId>
-                <artifactId>paradise-common</artifactId>
-                <version>${paradise.version}</version>
+                <artifactId>heaven</artifactId>
+                <version>${heaven.version}</version>
             </dependency>
 
             <!--============================== MAVEN ==============================-->

@@ -1,6 +1,7 @@
 package com.github.houbb.idoc.ftl.constant;
 
-import com.github.houbb.paradise.common.constant.MavenConstant;
+
+import com.github.houbb.heaven.constant.MavenConst;
 
 /**
  * markdown 常量
@@ -22,6 +23,13 @@ public final class MarkdownConstant {
          * idoc markdown 单个 class 文件信息模板
          */
         public static final String IDOC_MARKDOWN_CLASS_SEGMENT_FTL = "idoc-markdown-class-segment.ftl";
+
+        /**
+         * idoc markdown 单个 class 文件信息索引模板
+         * @since 0.2.0
+         */
+        public static final String IDOC_MARKDOWN_CLASS_SEGMENT_INDEX_FTL = "idoc-markdown-class-segment-index.ftl";
+
     }
 
     public static class Generate {
@@ -29,7 +37,7 @@ public final class MarkdownConstant {
         /**
          * markdown 的基础类文件夹
          */
-        public static final String IDOC_MARKDOWN_BASE_PACAKGE = MavenConstant.SRC_MAIN_RESOURCES_PATH+"idoc-gen";
+        public static final String IDOC_MARKDOWN_BASE_PACAKGE = MavenConst.SRC_MAIN_RESOURCES_PATH+"idoc-gen";
 
     }
 

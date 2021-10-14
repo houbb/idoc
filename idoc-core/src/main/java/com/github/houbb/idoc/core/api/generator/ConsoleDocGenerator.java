@@ -28,6 +28,7 @@ public class ConsoleDocGenerator implements IDocGenerator {
     public void generate(DocMavenProject docMavenProject, DocConfig docConfig, Collection<DocClass> docClasses) {
         if(CollectionUtil.isEmpty(docClasses)) {
             log.info("------------------------------------ 文档列表为空");
+            return;
         }
 
         log.info("------------------------------------ 文档信息如下：");

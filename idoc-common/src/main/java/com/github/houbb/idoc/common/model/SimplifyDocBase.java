@@ -21,6 +21,12 @@ public class SimplifyDocBase {
      */
     private String remark;
 
+    /**
+     * 备注第一行
+     * @since 0.2.0
+     */
+    private String commentFirstLine;
+
     public String getName() {
         return name;
     }
@@ -43,5 +49,13 @@ public class SimplifyDocBase {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getCommentFirstLine() {
+        return commentFirstLine;
+    }
+
+    public void setCommentFirstLine(String commentFirstLine) {
+        this.commentFirstLine = commentFirstLine;
     }
 }
