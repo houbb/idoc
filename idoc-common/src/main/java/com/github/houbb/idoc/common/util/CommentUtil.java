@@ -25,7 +25,11 @@ public final class CommentUtil {
 
         // 换行
         String[] strings = comment.split("\n");
-        return strings[0];
+        String line = strings[0];
+        return line.replaceAll("<p>","")
+                .replaceAll("</p>", "")
+                .replaceAll("\r", "")
+                .replaceAll("\n", "");
     }
 
 }

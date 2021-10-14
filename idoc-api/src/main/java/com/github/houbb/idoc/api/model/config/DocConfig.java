@@ -41,6 +41,12 @@ public class DocConfig {
      */
     private Map<String, String> typeAliases;
 
+    /**
+     * 目标文件件
+     * @since 0.3.0
+     */
+    private String targetDir;
+
     public boolean isOverwriteWhenExists() {
         return isOverwriteWhenExists;
     }
@@ -89,6 +95,14 @@ public class DocConfig {
         this.typeAliases = typeAliases;
     }
 
+    public String getTargetDir() {
+        return targetDir;
+    }
+
+    public void setTargetDir(String targetDir) {
+        this.targetDir = targetDir;
+    }
+
     @Override
     public String toString() {
         return "DocConfig{" +
@@ -98,6 +112,8 @@ public class DocConfig {
                 ", generates=" + Arrays.toString(generates) +
                 ", generateFilters=" + Arrays.toString(generateFilters) +
                 ", typeAliases=" + typeAliases +
+                ", targetDir='" + targetDir + '\'' +
                 '}';
     }
+
 }

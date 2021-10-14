@@ -128,7 +128,13 @@ mvn com.github.houbb:idoc-core:0.2.0:idoc
 
 # ROAD-MAP
 
-- [ ] 指定输出路径
+- [x] 指定输出路径
+
+- [ ] 支持自定义类排序，方法排序
+
+- [ ] 支持 version author 等基本信息
+
+- [ ] 列表添加序号信息
 
 - [ ] 更多的文档格式
 

@@ -14,6 +14,8 @@ import com.thoughtworks.qdox.model.JavaClass;
 import org.apache.maven.project.MavenProject;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -66,6 +68,15 @@ public class GenerateDocService extends AbstractExecuteService {
         // 生成文件的过滤
         IDocGenerateFilterManager includeFilterManager = new IDocGenerateFilterManager(docConfig.getGenerateFilters());
         List<DocClass> filterDocClassList = includeFilterManager.filter(docClassList);
+
+        // 排序: 默认根据包+类名，后续开发可配置性
+        Collections.sort(filterDocClassList, new Comparator<DocClass>() {
+            @Override
+            public int compare(DocClass o1, DocClass o2) {
+                return o1.getFullName().compareTo(o2.getFullName());
+            }
+        });
+
 
         // 文件的执行
         final DocMavenProject docMavenProject = buildDocMavenProject();

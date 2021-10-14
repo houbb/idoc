@@ -1,6 +1,8 @@
 package com.github.houbb.idoc.ftl.api.generator;
 
 import com.github.houbb.heaven.constant.MavenConst;
+import com.github.houbb.heaven.constant.PunctuationConst;
+import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.heaven.util.nio.PathUtil;
 import com.github.houbb.heaven.util.util.DateUtil;
 import com.github.houbb.idoc.api.core.genenrator.IDocGenerator;
@@ -67,10 +69,7 @@ public class MarkdownDocGenerator implements IDocGenerator {
         final boolean isOverwriteWhenExists = docConfig.isOverwriteWhenExists();
         final boolean isAllInOne = docConfig.isAllInOne();
 
-        String genBaseDir = docMavenProject.getBaseDir()
-                + File.separator
-                + MarkdownConstant.Generate.IDOC_MARKDOWN_BASE_PACAKGE
-                +File.separator;
+        String genBaseDir = getBaseTargetDir(docMavenProject, docConfig);
 
         //2.0 生成对应的文件
         List<SimplifyDocClass> simplifyDocClasses = CollectionUtil.buildList(docClasses, new SimplifyClassHandler());
@@ -95,10 +94,10 @@ public class MarkdownDocGenerator implements IDocGenerator {
                 // 这里的处理可以抽象出来，所有的实现只是具体的
                 final String packageName = javaClass.getPackageName();
                 final String className = javaClass.getName();
-                String segmentTargetPathStr = genBaseDir + PathUtil.packageToPath(packageName) + File.separator;
+                String segmentTargetPathStr = genBaseDir + PathUtil.packageToPath(packageName) + PunctuationConst.SLASH;
                 String targetFile = segmentTargetPathStr + className + ".md";
 
-                String docPath = PathUtil.packageToPath(packageName) + File.separator
+                String docPath = PathUtil.packageToPath(packageName) + PunctuationConst.SLASH
                         + className + ".md";
                 javaClass.setDocPath(docPath);
 
@@ -112,6 +111,32 @@ public class MarkdownDocGenerator implements IDocGenerator {
             final String indexContent = getDocClassIndexContent(simplifyDocClasses);
             FreemarkerUtil.createFile(indexTargetFile, isOverwriteWhenExists, indexContent);
         }
+    }
+
+    /**
+     * 获取基本的目标文件夹
+     * @param docMavenProject maven 项目
+     * @param docConfig 文档配置
+     * @return 路径
+     */
+    private String getBaseTargetDir(DocMavenProject docMavenProject, DocConfig docConfig) {
+        String targetDir = docConfig.getTargetDir();
+
+        if(StringUtil.isNotEmpty(targetDir)) {
+            // 判断是否包含 /
+            if(targetDir.endsWith(PunctuationConst.SLASH)) {
+                return targetDir;
+            }
+
+            return targetDir + PunctuationConst.SLASH;
+        }
+
+        String genBaseDir = docMavenProject.getBaseDir()
+                + PunctuationConst.SLASH
+                + MarkdownConstant.Generate.IDOC_MARKDOWN_BASE_PACAKGE
+                + PunctuationConst.SLASH;
+
+        return genBaseDir;
     }
 
     /**
@@ -156,14 +181,14 @@ public class MarkdownDocGenerator implements IDocGenerator {
             Configuration configuration = FreemarkerUtil.getConfiguration(encoding, true);
 
             //1. 判断根目录下是否有此文件 如果有则按照这个为准
-            final String userDefineFtl = baseDir + File.separator
+            final String userDefineFtl = baseDir + PunctuationConst.SLASH
                     + MavenConst.SRC_MAIN_RESOURCES_PATH +
                     MarkdownConstant.Template.IDOC_MARKDOWN_CLASS_SEGMENT_FTL;
             Path path = Paths.get(userDefineFtl);
             if (Files.exists(path)) {
                 // 用户根目录自定义
                 configuration.setDirectoryForTemplateLoading(new File(baseDir
-                        + File.separator + MavenConst.SRC_MAIN_RESOURCES_PATH));
+                        + PunctuationConst.SLASH + MavenConst.SRC_MAIN_RESOURCES_PATH));
             } else {
                 configuration.setClassForTemplateLoading(FreemarkerUtil.class,
                         MarkdownConstant.Template.IDOC_MARKDOWN_BASE_PACKAGE);

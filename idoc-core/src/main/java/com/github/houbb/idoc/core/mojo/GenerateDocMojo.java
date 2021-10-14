@@ -102,6 +102,13 @@ public class GenerateDocMojo extends AbstractMojo {
      */
     @Parameter(property = "typeAliases", required = false)
     private DocOption[] typeAliases;
+
+    /**
+     * 目标文件夹
+     * @since 0.3.0
+     */
+    @Parameter(property = "targetDir", required = false, defaultValue = "")
+    private String targetDir;
     //endregion
 
 
@@ -139,6 +146,7 @@ public class GenerateDocMojo extends AbstractMojo {
         docConfig.setGenerates(generates);
         docConfig.setGenerateFilters(generateFilters);
         docConfig.setTypeAliases(initTypeAliases());
+        docConfig.setTargetDir(targetDir);
         return docConfig;
     }
 
